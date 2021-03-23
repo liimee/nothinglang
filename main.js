@@ -1,10 +1,3 @@
-var test = `
-Linux(*yes*)
-Elementary(*hz*=*hz*#1)
-Linux(*no*)
-Linux(*wjat*)
-`;
-
 var vars = {};
 var ifs = {};
 
@@ -78,10 +71,4 @@ function parseVars(a) {
     a = a.replaceAll(`<|${v}|>`, vars[v]);
   });
   return a;
-}
-
-try {
-  compile(test);
-} catch (e) {
-  alert(e);
 }

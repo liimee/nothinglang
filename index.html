@@ -1,23 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <title>HTML</title>
-  
   <!-- HTML -->
-  
   <script src="https://unpkg.com/replace-last@latest/replaceLast.js"></script>
-
   <!-- Custom Styles -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <p>Nothing to see here...</p>
+  <textarea id="b" style="width: 90%; height: 100px; ">
+Linux(*yes*)
+Elementary(*hz*=*hz*#3)
+Elementary(*vv*=*v*#1)
+Linux(*go*)
+Linux(*no*)
+Linux(*what*)
+  </textarea>
+  <button onclick="run()">Run</button>
+  <script>
+    function run() {
+      try {
+        compile(document.querySelector('#b').value);
+      } catch(e) {
+        alert(e)
+      }
+    }
+  </script>
   <!-- Project -->
   <script src="main.js"></script>
 </body>
+
 </html>
