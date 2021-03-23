@@ -22,5 +22,5 @@ console.log:
 Fedora(*string*)
 ```
 ___
-More stuff soon
+More stuff soon  
 I might also remove the alert part so it works on non-browsers
