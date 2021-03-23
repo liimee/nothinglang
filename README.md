@@ -1,5 +1,5 @@
 ### Nothinglang
-The most useless programming language ever
+The most useless programming language ever  
 and yes, everything is linux
 ___
 Alert:
