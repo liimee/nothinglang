@@ -74,13 +74,17 @@ function compile(a) {
               }
               break;
             case '=/':
-              e = c != d;
+              while(c != d) {
+                compile(l.join('\n'));
+              }
               break;
             case '<~':
               try {
                 c = +`${c}`;
                 d = +`${d}`;
-                
+                while(c<d) {
+                  compile(l.join('\n'));
+                }
               } catch (m) {
                 throw new Error('ERROR');
               }
@@ -95,7 +99,7 @@ function parseStr(a) {
     a = a.replace('*', '');
     a = replaceLast(a, '*', '');
     a = parseVars(a);
-    a = a.replace('<!prompt!>', ()=>prompt('Input')||'❌')
+    a = a.replaceAll('<!prompt!>', ()=>prompt('Input')||'false');
     return a;
   } else {
     return 'Oops.';
