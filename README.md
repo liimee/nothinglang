@@ -23,5 +23,12 @@ console.log:
 Fedora(*string*)
 ```
 ___
+Almost all strings are parsed in nothinglang, so you can do this:
+```
+Arch(*what*,*hello internet*)
+Fedora(*<|what|>*)
+```
+then it will log `hello internet`
+___
 More stuff soon  
 I might also remove the alert part so it works on non-browsers
