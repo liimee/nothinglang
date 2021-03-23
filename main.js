@@ -58,6 +58,33 @@ function compile(a) {
           for(var c = 1; c < Number(b[1].split('#')[0]); c++) {
             compile(d.join('\n'));
           }
+          break;
+        case 'Debian':
+          var c = parseStr(`*${b[1].split('*')[1]}*`);
+          var d = parseStr(`*${b[1].split('*')[3]}*`);
+          var e = false;
+          var l = [];
+          for(var x = 0; x < Number(b[1].split('#')[1].replace(')', '')); x++) {
+            l.push(cd[$+(x+1)]);
+          }
+          switch (b[1].split('*')[2].split('*')[0]) {
+            case '=':
+              while(c == d) {
+                compile(l.join('\n'));
+              }
+              break;
+            case '=/':
+              e = c != d;
+              break;
+            case '<~':
+              try {
+                c = +`${c}`;
+                d = +`${d}`;
+                
+              } catch (m) {
+                throw new Error('ERROR');
+              }
+          }
       }
     }
   })

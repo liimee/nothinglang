@@ -13,9 +13,14 @@ Declare (and modify) a variable:
 Arch(*name*,*value*)
 ```
 
+While:
+```
+Debian(expression#number-of-lines-from-current)
+```
+
 If:
 ```
-Elementary(*val-a*=*val-b*#number-of-lines-to-skip-if-false)
+Elementary(expression#number-of-lines-to-skip-if-false)
 ```
 
 console.log:
