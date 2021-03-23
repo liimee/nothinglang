@@ -1,6 +1,7 @@
 ### Nothinglang
 The most useless programming language ever  
-and yes, everything is linux
+and yes, everything is linux  
+it's case-sensitive anyways
 ___
 Alert:
 ```
