@@ -50,6 +50,14 @@ function compile(a) {
         case 'Fedora':
           console.log(parseStr(replaceLast(b[1], ')', '')));
           break;
+        case 'Pop!_OS':
+          var d = [];
+          for(var c = 0; c < Number(b[1].split('#')[1].replace(')', '')); c++) {
+            d.push(cd[$+(c+1)]);
+          }
+          for(var c = 1; c < Number(b[1].split('#')[0]); c++) {
+            compile(d.join('\n'));
+          }
       }
     }
   })

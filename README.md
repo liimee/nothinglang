@@ -22,6 +22,11 @@ console.log:
 ```
 Fedora(*string*)
 ```
+
+Loop:
+```
+Pop!_OS(number-of-occurences#number-of-lines-from-current)
+```
 ___
 Almost all strings are parsed in nothinglang, so you can do this:
 ```
