@@ -24,3 +24,4 @@ Fedora(*string*)
 ```
 ___
 More stuff soon
+I might also remove the alert part so it works on non-browsers
