@@ -33,7 +33,12 @@ Almost all strings are parsed in nothinglang, so you can do this:
 Arch(*what*,*hello internet*)
 Fedora(*<|what|>*)
 ```
-then it will log `hello internet`
+(then it will log `hello internet`), and this:
+```
+Arch(*what*,*<!prompt!>*)
+Linux(*<|what|>*)
+```
+(it will do `prompt()`)
 ___
 More stuff soon  
 I might also remove the alert part so it works on non-browsers
