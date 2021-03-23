@@ -41,4 +41,4 @@ Linux(*<|what|>*)
 (it will do `prompt()`)
 ___
 More stuff soon  
-I might also remove the alert part so it works on non-browsers
+I might also remove the alert (and other browser-only stuff) part so it works on non-browsers
