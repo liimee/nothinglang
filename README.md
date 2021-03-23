@@ -3,7 +3,7 @@ The most useless programming language ever
 and yes, everything is linux  
 it's case-sensitive anyways  
 
-Nothinglang compiles to JS, so JS errors also exist.
+Nothinglang compiles to JS, so JS errors also, obviously exist.
 ___
 [Guide](guide.md)
 ___
