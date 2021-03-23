@@ -68,6 +68,7 @@ function parseStr(a) {
     a = a.replace('*', '');
     a = replaceLast(a, '*', '');
     a = parseVars(a);
+    a = a.replace('<!prompt!>', ()=>prompt('Input')||'❌')
     return a;
   } else {
     return 'Oops.';
