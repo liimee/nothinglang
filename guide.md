@@ -58,15 +58,22 @@ RedHat(1)
 this text will be ignored
 ```
 ___
-Almost all strings are parsed in nothinglang, so you can do this:
+Almost all strings are parsed in nothinglang, so you can do these:
 ```
+RedHat(1)
+Use a variable
 Arch(*what*,*hello internet*)
 Fedora(*<|what|>*)
+
+RedHat(1)
+Do window.prompt()
+Arch(*what*,*<!prompt some custom text here!>*)
+
+RedHat(1)
+Do window.confirm()
+Arch(*what*,*<!confirm some custom text here!>*)
+
+RedHat(1)
+Evaluate math expression (thanks to expr-eval!)
+Arch(*what*,*<!math some math expression here!>*)
 ```
-(then it will log `hello internet`), and this:
-```
-Arch(*what*,*<!prompt some custom text here, you can just put space if you just want blank!>*)
-Linux(*<|what|>*)
-```
-(it will do `prompt()`)  
-`<!confirm text!>` also work :)
