@@ -99,7 +99,9 @@ function parseStr(a) {
     a = a.replace('*', '');
     a = replaceLast(a, '*', '');
     a = parseVars(a);
-    a = a.replaceAll('<!prompt!>', ()=>prompt('Input')||'false');
+    [...(a.matchAll(/\<\!prompt (.*?)\!\>/g))].forEach((v, i, r) => {
+      a = a.replace(v[0], prompt(v[1]));
+    });
     [...(a.matchAll(/\<\!confirm (.*?)\!\>/g))].forEach((v, i, r) => {
       a = a.replace(v[0], confirm(v[1]));
     });
