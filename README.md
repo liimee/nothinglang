@@ -1,4 +1,4 @@
-![nothinglang](nlang.png)
+<img src="nlang.png" alt="nothinglang" align="center">
 ### nothinglang
 The most useless programming language ever  
 and yes, everything is linux  
