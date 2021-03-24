@@ -65,7 +65,8 @@ Fedora(*<|what|>*)
 ```
 (then it will log `hello internet`), and this:
 ```
-Arch(*what*,*<!prompt!>*)
+Arch(*what*,*<!prompt some custom text here, you can just put space if you just want blank!>*)
 Linux(*<|what|>*)
 ```
-(it will do `prompt()`) 
+(it will do `prompt()`)  
+`<!confirm text!>` also work :)
