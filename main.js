@@ -111,9 +111,6 @@ function parseStr(a) {
         comparison: false
       }
     });
-    [...(a.matchAll(/\<\!math (.*?)\!\>/g))].forEach((v, i, r) => {
-      a = a.replace(v[0], parser.parse(v[1]).evaluate());
-    });
     return a;
   } else {
     return 'Oops.';
@@ -123,6 +120,9 @@ function parseStr(a) {
 function parseVars(a) {
   Object.keys(vars).forEach(v => {
     a = a.replaceAll(`<|${v}|>`, vars[v]);
+  });
+  [...(a.matchAll(/\<\!math (.*?)\!\>/g))].forEach((v, i, r) => {
+    a = a.replace(v[0], parser.parse(v[1]).evaluate());
   });
   return a;
 }
