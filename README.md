@@ -9,4 +9,5 @@ ___
 [Guide](guide.md)
 ___
 More stuff soon  
-I might also remove the alert (and other browser-only stuff) part so it works on non-browsers
+I might also remove the alert (and other browser-only stuff) part so it works on non-browsers  
+PRs are welcome :D
