@@ -22,6 +22,10 @@ Debian(expression#number-of-lines-from-current)
 Debian(*<|customerpaid|>*=/*true*#1)
 Linux(*PAY!!*)
 ```
+**Note:**  
+`*val1*=*val2*` = `'val1' == 'val2'`  
+`*val1*=/*val2*` = `'val1' != 'val2'`  
+`*val1*<~*val2*` = `'val1' < 'val2'`  
 
 If:
 ```
