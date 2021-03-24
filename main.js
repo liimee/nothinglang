@@ -14,7 +14,7 @@ function compile(a) {
       }
     });
     if (!next) {
-      var b = v.split('(');
+      var b = v.split(/\((.+)/);
       switch (b[0]) {
         case 'Linux':
           alert(parseStr(replaceLast(b[1], ')', '')));
@@ -105,12 +105,6 @@ function parseStr(a) {
     [...(a.matchAll(/\<\!confirm (.*?)\!\>/g))].forEach((v, i, r) => {
       a = a.replace(v[0], confirm(v[1]));
     });
-    var parser = new exprEval.Parser({
-      operators: {
-        logical: false,
-        comparison: false
-      }
-    });
     return a;
   } else {
     return 'Oops.';
@@ -120,6 +114,12 @@ function parseStr(a) {
 function parseVars(a) {
   Object.keys(vars).forEach(v => {
     a = a.replaceAll(`<|${v}|>`, vars[v]);
+  });
+  var parser = new exprEval.Parser({
+    operators: {
+      logical: false,
+      comparison: false
+    }
   });
   [...(a.matchAll(/\<\!math (.*?)\!\>/g))].forEach((v, i, r) => {
     a = a.replace(v[0], parser.parse(v[1]).evaluate());
