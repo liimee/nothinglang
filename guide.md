@@ -72,12 +72,15 @@ Fedora(*<|what|>*)
 RedHat(1)
 Do window.prompt()
 Arch(*what*,*<!prompt some custom text here!>*)
+Arch(*what*,*<!prompt What is your name?!>*)
 
 RedHat(1)
 Do window.confirm()
 Arch(*what*,*<!confirm some custom text here!>*)
+Arch(*what*,*<!confirm 1 pepperoni pizza?!>*)
 
 RedHat(1)
 Evaluate math expression (thanks to expr-eval!)
 Arch(*what*,*<!math some math expression here!>*)
+Arch(*what*,*<!math 1+1+1+1!>*)
 ```
