@@ -34,7 +34,7 @@ ZorinOS(*dirname*)
 ZorinOS(*Collections*)
 ```
 ___
-### Commands that requires the `--allow-write` flag (see [this](https://deno.land/manual/getting_started/permissions#permissions-list)
+### Commands that requires the `--allow-write` flag (see [this](https://deno.land/manual/getting_started/permissions#permissions-list))
 - `RaspberryPiOS`
 - `Manjaro`
 - `Ubuntu`
