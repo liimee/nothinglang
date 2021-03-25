@@ -1,4 +1,4 @@
-- [Basic Functions](#BasicFunctions)
+- <a href="#Basic Functions">Basic Functions</a>
 - - [Alert](#Alert)
 
 ___
