@@ -2,13 +2,14 @@
 
 ### nothinglang
 The most useless programming language ever  
-and yes, everything is linux  
+and yes, everything is linux 🐧  
 it's case-sensitive anyways  
 
 Nothinglang compiles to JS, so JS errors also, obviously exist.  
 And, obviously, it's really bad
 ___
-[Guide](guide.md)
+[🌐 Browser Version Guide](guide.md)  
+[🦕 Deno Version Guide](dguide.md)
 ___
 If you feel like the web version is so bad, then use the deno version:
 ```shell
