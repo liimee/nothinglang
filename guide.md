@@ -1,3 +1,5 @@
+## Guide
+
 Alert:
 ```
 Linux(*string*)
@@ -83,4 +85,14 @@ RedHat(1)
 Evaluate math expression (thanks to expr-eval!)
 Arch(*what*,*<!math some math expression here!>*)
 Arch(*what*,*<!math 1+1+1+1!>*)
+
+RedHat(1)
+Encode Base64
+Arch(*what*,*<!deepin.enc string!>*)
+Arch(*what*,*<!deepin.enc lolllllll!>*)
+
+RedHat(1)
+Decode Base64
+Arch(*what*,*<!deepin.dec base64!>*)
+Arch(*what*,*<!deepin.dec bG9sbGxsbGxs!>*)
 ```
