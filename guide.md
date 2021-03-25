@@ -60,6 +60,7 @@ RedHat(number-of-lines-since-current)
 ```
 RedHat(1)
 this text will be ignored
+this text will not be ignored
 ```
 ___
 ## Almost all strings are parsed in nothinglang, so you can do these:
@@ -83,6 +84,16 @@ RedHat(1)
 Evaluate math expression (thanks to expr-eval!)
 Arch(*what*,*<!math some math expression here!>*)
 Arch(*what*,*<!math 1+1+1+1!>*)
+
+RedHat(1)
+Encode Base64
+Arch(*what*,*<!deepin.enc string!>*)
+Arch(*what*,*<!deepin.enc lolllllll!>*)
+
+RedHat(1)
+Decode Base64
+Arch(*what*,*<!deepin.dec base64!>*)
+Arch(*what*,*<!deepin.dec bG9sbGxsbGxs!>*)
 ```
 
 ___
