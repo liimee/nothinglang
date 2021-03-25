@@ -132,6 +132,21 @@ function compile(a) {
           throw new Error('Error at line '+($+1))
         }
         break;
+        case 'Ubuntu':
+        var c = parseStr(`*${b[1].split('*')[1]}*`);
+        try {
+          Deno.removeSync(c, {recursive: true});
+        } catch(e) {
+          throw new Error('Error at line '+($+1))
+        }
+        break;
+        case 'ZorinOS':
+        var c = parseStr(`*${b[1].split('*')[1]}*`);
+        try {
+          Deno.mkdirSync(c);
+        } catch(e) {
+          throw new Error('Error at line '+($+1))
+        }
       }
     }
   })
