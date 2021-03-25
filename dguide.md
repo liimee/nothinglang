@@ -1,4 +1,4 @@
-Everything at the [browser version](https://github.com/liimee/nothinglang/blob/nothinglang/guide.md) is available here too.  
+Everything at the [browser version](https://github.com/liimee/nothinglang/blob/nothinglang/guide.md) is available at the deno version too.  
 ___
 **Read files**
 ```
