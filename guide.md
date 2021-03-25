@@ -99,6 +99,13 @@ ___
 ![Preview](dno.gif)  
 
 ___  
+To run your code, open up a terminal and use this command (make sure [Deno](https://deno.land) is installed)
+```shell
+deno run --allow-read https://raw.githubusercontent.com/liimee/nothinglang/nothinglang/deno.js filename.nothing
+```
+The `--allow-read` flag is necessary.  
+
+___
 ### Read files
 ```
 Arch(*file*,*<!opensuse filename.fileext!>*)
