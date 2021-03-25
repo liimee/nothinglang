@@ -1,12 +1,11 @@
-Everything at the [browser version](https://github.com/liimee/nothinglang/blob/nothinglang/guide.md) is supported at the deno version too.    
-___
 To run your code, open up a terminal and use this command (make sure [Deno](https://deno.land) is installed)
 ```shell
 deno run --allow-read https://raw.githubusercontent.com/liimee/nothinglang/nothinglang/deno.js filename.nothing
 ```
 The `--allow-read` flag is necessary.  
 ___
-> (It is recommended to read the [browser version](https://github.com/liimee/nothinglang/blob/nothinglang/guide.md) first before reading this guide.  
+> (It is recommended to read the [browser version](https://github.com/liimee/nothinglang/blob/nothinglang/guide.md) first before reading this guide. Everything there is supported here too.  
+
 **Read files** ([Deno Docs](https://doc.deno.land/builtin/stable#Deno.readFileSync))
 ```
 Arch(*file*,*<!opensuse filename.fileext!>*)
