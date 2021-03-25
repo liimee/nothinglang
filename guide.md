@@ -1,6 +1,8 @@
-[Alert](#Alert)
+- [Basic Functions](#Basic Functions)
+-- [Alert](#Alert)
 
 ___
+## Basic Functions
 ### Alert:
 ```
 Linux(*Pizza*)
@@ -63,7 +65,7 @@ this text will be ignored
 this text will not be ignored
 ```
 ___
-## Almost all strings are parsed in nothinglang, so you can do these:
+### Almost all strings are parsed in nothinglang, so you can do these:
 ```
 RedHat(1)
 Use a variable
