@@ -3,32 +3,33 @@ To run your code, open up a terminal and use this command (make sure [Deno](http
 deno run --allow-read https://raw.githubusercontent.com/liimee/nothinglang/nothinglang/deno.js filename.nothing
 ```
 The `--allow-read` flag is necessary.  
+
 ___
 > (It is recommended to read the [browser version](https://github.com/liimee/nothinglang/blob/nothinglang/guide.md) first before reading this guide. Everything there is supported here too.)  
 
-**Read files** ([Deno Docs](https://doc.deno.land/builtin/stable#Deno.readFileSync))
+**Read files**
 ```
 Arch(*file*,*<!opensuse filename.fileext!>*)
 Arch(*file*,*<!opensuse thingy.txt!>*)
 ```
 (files will be treated as UTF-8)  
 
-**Write files** (edit if file exist, create if not) ([Deno Docs](https://doc.deno.land/builtin/stable#Deno.writeFileSync))
+**Write files** (edit if file exist, create if not)
 ```
 RaspberryPiOS(*filename*,*contents*)
 RaspberryPiOS(*thingy.txt*,*🐧🦕*)
 ```
-**Edit files** ([Deno Docs](https://doc.deno.land/builtin/stable#Deno.writeFileSync))
+**Edit files**
 ```
 Manjaro(*filename*,*newcontent*)
 Manjaro(*thingy.txt*,*😛*)
 ```
-**Remove file/folder** ([Deno Docs](https://doc.deno.land/builtin/stable#Deno.removeSync))
+**Remove file/folder**
 ```
 Ubuntu(*filename*)
 Ubuntu(*thingy.txt*)
 ```
-**Create a new folder** ([Deno Docs](https://doc.deno.land/builtin/stable#Deno.removeSync))
+**Create a new folder**
 ```
 ZorinOS(*dirname*)
 ZorinOS(*Collections*)
