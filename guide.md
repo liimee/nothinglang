@@ -1,7 +1,3 @@
-- <a href="#Basic Functions">Basic Functions</a>
-- - [Alert](#Alert)
-
-___
 ## Basic Functions
 ### Alert:
 ```
