@@ -15,6 +15,6 @@ RaspberryPiOS(*thingy.txt*,*🐧🦕*)
 **Edit files**
 ```
 Manjaro(*filename*,*newcontent*)
-Manjaro(*filename*,*😛*)
+Manjaro(*thingy.txt*,*😛*)
 ```
 **⚠️ MAKE SURE TO ADD THE `--allow-write` FLAG IF YOU WANT TO WRITE/EDIT FILES OR IT WILL NOT WORK**
