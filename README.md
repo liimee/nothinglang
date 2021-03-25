@@ -13,7 +13,7 @@ ___
 ___
 If you feel like the web version is so bad, then use the deno version:
 ```shell
-deno run --allow-read https://raw.githubusercontent.com/liimee/nothinglang/nothinglang/deno.js filename.js
+deno run --allow-read https://raw.githubusercontent.com/liimee/nothinglang/nothinglang/deno.js filename.nothing
 ```
 (make sure the --allow-read flag exist)
 ___
