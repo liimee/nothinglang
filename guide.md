@@ -1,12 +1,12 @@
-Alert:
-```
-Linux(*string*)
-```
+[Alert](#Alert)
+
+___
+### Alert:
 ```
 Linux(*Pizza*)
 ```
 
-Declare (and modify) a variable:
+### Declare (and modify) a variable:
 ```
 Arch(*name*,*value*)
 ```
@@ -14,7 +14,7 @@ Arch(*name*,*value*)
 Arch(*type*,*Pepperoni*)
 ```
 
-While:
+### While:
 ```
 Debian(expression#number-of-lines-from-current)
 ```
@@ -27,7 +27,7 @@ Linux(*PAY!!*)
 `*val1*=/*val2*` = `'val1' != 'val2'`  
 `*val1*<~*val2*` = `'val1' < 'val2'`  
 
-If:
+### If:
 ```
 Elementary(expression#number-of-lines-to-skip-if-false)
 ```
@@ -36,7 +36,7 @@ Elementary(*<|type|>*=*Pepperoni*#1)
 Linux(*That would be $5*)
 ```
 
-console.log:
+### console.log:
 ```
 Fedora(*string*)
 ```
@@ -44,7 +44,7 @@ Fedora(*string*)
 Fedora(*Welcome!*)
 ```
 
-Loop:
+### Loop:
 ```
 Pop!_OS(number-of-occurences#number-of-lines-from-current)
 ```
@@ -53,7 +53,7 @@ Pop!_OS(10#1)
 Fedora(*🍕*)
 ```
 
-(Multi-Line) Comment:
+### (Multi-Line) Comment:
 ```
 RedHat(number-of-lines-since-current)
 ```
@@ -62,7 +62,7 @@ RedHat(1)
 this text will be ignored
 ```
 ___
-Almost all strings are parsed in nothinglang, so you can do these:
+## Almost all strings are parsed in nothinglang, so you can do these:
 ```
 RedHat(1)
 Use a variable
@@ -84,3 +84,44 @@ Evaluate math expression (thanks to expr-eval!)
 Arch(*what*,*<!math some math expression here!>*)
 Arch(*what*,*<!math 1+1+1+1!>*)
 ```
+
+___
+## Deno-version-only Functions
+![Preview](dno.gif)  
+
+___  
+### Read files
+```
+Arch(*file*,*<!opensuse filename.fileext!>*)
+Arch(*file*,*<!opensuse thingy.txt!>*)
+```
+(files will be treated as UTF-8)  
+
+### Write files (edit if file exist, create if not)
+```
+RaspberryPiOS(*filename*,*contents*)
+RaspberryPiOS(*thingy.txt*,*🐧🦕*)
+```
+### Edit files
+```
+Manjaro(*filename*,*newcontent*)
+Manjaro(*thingy.txt*,*😛*)
+```
+### Delete file/folder
+```
+Ubuntu(*filename*)
+Ubuntu(*thingy.txt*)
+```
+
+### Create a new folder
+```
+ZorinOS(*dirname*)
+ZorinOS(*Collections*)
+```
+
+___
+## Functions that requires the `--allow-write` flag (see [this](https://deno.land/manual/getting_started/permissions#permissions-list))
+- `RaspberryPiOS`
+- `Manjaro`
+- `Ubuntu`
+- `ZorinOS`
