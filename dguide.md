@@ -1,4 +1,5 @@
 ![Preview](dno.gif)  
+
 ___
 To run your code, open up a terminal and use this command (make sure [Deno](https://deno.land) is installed)
 ```shell
@@ -36,6 +37,7 @@ Ubuntu(*thingy.txt*)
 ZorinOS(*dirname*)
 ZorinOS(*Collections*)
 ```
+
 ___
 ### Commands that requires the `--allow-write` flag (see [this](https://deno.land/manual/getting_started/permissions#permissions-list))
 - `RaspberryPiOS`
