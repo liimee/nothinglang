@@ -44,7 +44,7 @@ function compile(a) {
         alert(parseStr(replaceLast(b[1], ')', '')));
         break;
         case 'Arch':
-        if (b[1].split('*')[1].split('*')[0].includes(',')) throw new Error(`Invalid variable name`);
+        if (b[1].split('*')[1].split('*')[0].includes(',')) throw new Error(`Invalid variable name at line ${$+1}`);
         vars[parseStr(b[1].split(',')[0])] = parseStr(replaceLast(b[1], ')', '').split(',')[1]);
         break;
         case 'Elementary':
@@ -64,7 +64,7 @@ function compile(a) {
             d = +`${d}`;
             e = c < d;
           } catch (m) {
-            throw new Error('ERROR');
+            throw new Error('ERROR at line '+($+1));
           }
         }
         if (!e) {
@@ -110,9 +110,28 @@ function compile(a) {
               compile(l.join('\n'));
             }
           } catch (m) {
-            throw new Error('ERROR');
+            throw new Error('ERROR at line '+($+1));
           }
         }
+        break;
+        case 'RaspberryPiOS':
+        var c = parseStr(`*${b[1].split('*')[1]}*`);
+        var d = parseStr(`*${b[1].split('*')[3]}*`);
+        var encod = new TextEncoder();
+        var dat = encod.encode(d);
+        Deno.writeFileSync(c, dat);
+        break;
+        case 'Manjaro':
+        var c = parseStr(`*${b[1].split('*')[1]}*`);
+        var d = parseStr(`*${b[1].split('*')[3]}*`);
+        var enco = new TextEncoder();
+        var dat = enco.encode(d);
+        try {
+          Deno.writeFileSync(c, dat, {create: false});
+        } catch(e) {
+          throw new Error('Error at line '+($+1))
+        }
+        break;
       }
     }
   })
@@ -128,6 +147,11 @@ function parseStr(a) {
     });
     [...(a.matchAll(/\<\!confirm (.*?)\!\>/g))].forEach((v, i, r) => {
       a = a.replace(v[0], confirm('[CONFIRM] ' + v[1]));
+    });
+    [...(a.matchAll(/\<\!opensuse (.*?)\!\>/g))].forEach((v, i, r) => {
+      var decode = new TextDecoder("utf-8");
+      var dat = Deno.readFileSync(v[1]);
+      a = a.replace(v[0], decode.decode(dat));
     });
     return a;
   } else {
