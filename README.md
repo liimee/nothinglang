@@ -8,7 +8,7 @@ it's case-sensitive anyways
 Nothinglang compiles to JS, so JS errors also, obviously exist.  
 And, obviously, it's really bad
 
-The Deno version is now available!
+**The Deno version is now available!**
 ___
 [🌐 Browser Version Guide](guide.md)  
 [🦕 Deno Version Guide](dguide.md)
