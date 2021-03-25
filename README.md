@@ -18,5 +18,5 @@ deno run --allow-read https://raw.githubusercontent.com/liimee/nothinglang/nothi
 (make sure the --allow-read flag exist)
 ___
 More stuff soon  
-I might also remove the alert (and other browser-only stuff) part so it works on non-browsers  
+~~I might also remove the alert (and other browser-only stuff) part so it works on non-browsers~~ apparently deno supports those stuff  
 PRs are welcome :D
