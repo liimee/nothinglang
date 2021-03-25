@@ -23,4 +23,19 @@ RaspberryPiOS(*thingy.txt*,*🐧🦕*)
 Manjaro(*filename*,*newcontent*)
 Manjaro(*thingy.txt*,*😛*)
 ```
-**⚠️ MAKE SURE TO ADD THE `--allow-write` FLAG IF YOU WANT TO WRITE/EDIT FILES OR IT WILL NOT WORK**
+**Remove file/folder**
+```
+Ubuntu(*filename*)
+Ubuntu(*thingy.txt*)
+```
+**Create a new folder**
+```
+ZorinOS(*dirname*)
+ZorinOS(*Collections*)
+```
+___
+### Commands that requires the `--allow-write` flag
+- `RaspberryPiOS`
+- `Manjaro`
+- `Ubuntu`
+- `ZorinOS`
