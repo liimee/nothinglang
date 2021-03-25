@@ -9,7 +9,7 @@ Nothinglang compiles to JS, so JS errors also, obviously exist.
 And, obviously, it's really bad
 ___
 [🌐 Browser Version Guide](guide.md)  
-[🦕 Deno Version Guide](dguide.md)
+[🦕 Deno (Command Line) Version Guide](dguide.md)
 ___
 More stuff soon  
 **It's really bad so use at your own risk**. 
