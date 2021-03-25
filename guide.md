@@ -62,6 +62,7 @@ RedHat(number-of-lines-since-current)
 ```
 RedHat(1)
 this text will be ignored
+this text will not be ignored
 ```
 ___
 Almost all strings are parsed in nothinglang, so you can do these:
