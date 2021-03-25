@@ -6,6 +6,7 @@ Arch(*file*,*<!opensuse filename.fileext!>*)
 Arch(*file*,*<!opensuse thingy.txt!>*)
 ```
 (files will be treated as UTF-8)  
+
 **Write files** (edit if file exist, create if not)
 ```
 RaspberryPiOS(*filename*,*contents*)
