@@ -1,5 +1,5 @@
 - [Basic Functions](#Basic Functions)  
--- [Alert](#Alert)
+- - [Alert](#Alert)
 
 ___
 ## Basic Functions
