@@ -1,6 +1,6 @@
 Everything at the [browser version](https://github.com/liimee/nothinglang/blob/nothinglang/guide.md) is supported at the deno version too.  
 ___
-To run your code, use this command (make sure [Deno](https://deno.land) is installed)
+To run your code, open up a terminal and use this command (make sure [Deno](https://deno.land) is installed)
 ```shell
 deno run --allow-read https://raw.githubusercontent.com/liimee/nothinglang/nothinglang/deno.js filename.nothing
 ```
