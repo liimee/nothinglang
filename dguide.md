@@ -1,4 +1,4 @@
-Everything at the [browser version](https://github.com/liimee/nothinglang/blob/nothinglang/guide.md) is available at the deno version too.  
+Everything at the [browser version](https://github.com/liimee/nothinglang/blob/nothinglang/guide.md) is supported at the deno version too.  
 ___
 To run your code, use this command (make sure [Deno](https://deno.land) is installed)
 ```shell
