@@ -1,4 +1,4 @@
-- [Basic Functions](#Basic Functions)
+- [Basic Functions](#Basic Functions)  
 -- [Alert](#Alert)
 
 ___
