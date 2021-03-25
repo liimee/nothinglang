@@ -8,8 +8,8 @@ it's case-sensitive anyways
 Nothinglang compiles to JS, so JS errors also, obviously exist.  
 And, obviously, it's really bad
 ___
-[🌐 Browser Version Guide](guide.md)  
-[🦕 Deno (Command Line) Version Guide](dguide.md)
+[📖 Guide](guide.md)
+
 ___
 More stuff soon  
 **It's really bad so use at your own risk**. 
