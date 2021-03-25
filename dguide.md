@@ -6,6 +6,7 @@ deno run --allow-read https://raw.githubusercontent.com/liimee/nothinglang/nothi
 ```
 The `--allow-read` flag is necessary.  
 ___
+> (It is recommended to read the [browser version](https://github.com/liimee/nothinglang/blob/nothinglang/guide.md) first before reading this guide.  
 **Read files** ([Deno Docs](https://doc.deno.land/builtin/stable#Deno.readFileSync))
 ```
 Arch(*file*,*<!opensuse filename.fileext!>*)
