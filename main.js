@@ -105,6 +105,12 @@ function parseStr(a) {
     [...(a.matchAll(/\<\!confirm (.*?)\!\>/g))].forEach((v, i, r) => {
       a = a.replace(v[0], confirm(v[1]));
     });
+    [...(a.matchAll(/\<\!deepin\.enc (.*?)\!\>/g))].forEach((v, i, r) => {
+      a = a.replace(v[0], btoa(v[1]));
+    });
+    [...(a.matchAll(/\<\!deepin\.dec (.*?)\!\>/g))].forEach((v, i, r) => {
+      a = a.replace(v[0], atob(v[1]));
+    });
     return a;
   } else {
     return 'Oops.';

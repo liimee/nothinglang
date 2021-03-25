@@ -168,6 +168,12 @@ function parseStr(a) {
       var dat = Deno.readFileSync(v[1]);
       a = a.replace(v[0], decode.decode(dat));
     });
+    [...(a.matchAll(/\<\!deepin\.enc (.*?)\!\>/g))].forEach((v, i, r) => {
+      a = a.replace(v[0], btoa(v[1]));
+    });
+    [...(a.matchAll(/\<\!deepin\.dec (.*?)\!\>/g))].forEach((v, i, r) => {
+      a = a.replace(v[0], atob(v[1]));
+    });
     return a;
   } else {
     return 'Oops.';
