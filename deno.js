@@ -183,7 +183,7 @@ function parseStr(a, b) {
     [...(a.matchAll(/\<\!deepin\.dec (.*?)\!\>/g))].forEach((v, i, r) => {
       a = a.replace(v[0], atob(v[1]));
     });
-    var parser = new exprEval.Parser({
+    var parser = new Parser({
       operators: {
         logical: false,
         comparison: false
