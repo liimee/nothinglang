@@ -49,6 +49,9 @@ Pop!_OS(number-of-occurences#number-of-lines-from-current)
 ```
 Pop!_OS(10#1)
 Fedora(*🍕*)
+
+Pop!_OS(8#1)
+Linux(*<@currentindex@>*) 
 ```
 
 ### (Multi-Line) Comment:
