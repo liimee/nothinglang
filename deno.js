@@ -1,4 +1,4 @@
-import {Parser} from 'https://jspm.dev/expr-eval';
+import { Parser } from 'https://jspm.dev/expr-eval';
 
 var vars = {};
 var ifs = {};
@@ -8,12 +8,12 @@ try {
   try {
     const data = Deno.readFileSync(Deno.args[0]);
     compile(decoder.decode(data));
-  } catch(e) {
+  } catch (e) {
     console.log('Compile Error');
     console.log(e);
     Deno.exit(1);
   }
-} catch(e) {
+} catch (e) {
   console.log('Error');
   console.log(e);
   Deno.exit(1);
@@ -25,7 +25,7 @@ function replaceLast(a, b, c) {
   return pcs.join(b) + c + lastPc;
 }
 
-function compile(a) {
+function compile(a, g) {
   var cd = a.split('\n');
   cd.forEach((v, $) => {
     var next = false;
@@ -41,132 +41,141 @@ function compile(a) {
       var b = v.split(/\((.+)/);
       switch (b[0]) {
         case 'Linux':
-        alert(parseStr(replaceLast(b[1], ')', '')));
-        break;
+          alert(parseStr(replaceLast(b[1], ')', ''), g || {}));
+          break;
         case 'Arch':
-        if (b[1].split('*')[1].split('*')[0].includes(',')) throw new Error(`Invalid variable name at line ${$+1}`);
-        vars[parseStr(b[1].split(',')[0])] = parseStr(replaceLast(b[1], ')', '').split(',')[1]);
-        break;
+          if (b[1].split('*')[1].split('*')[0].includes(',')) throw new Error(`Invalid variable name`);
+          vars[parseStr(b[1].split(',')[0], g || {})] = parseStr(replaceLast(b[1], ')', '').split(',')[1], g || {});
+          break;
         case 'Elementary':
-        var c = parseStr(`*${b[1].split('*')[1]}*`);
-        var d = parseStr(`*${b[1].split('*')[3]}*`);
-        var e = false;
-        switch (b[1].split('*')[2].split('*')[0]) {
-          case '=':
-          e = c == d;
-          break;
-          case '=/':
-          e = c != d;
-          break;
-          case '<~':
-          try {
-            c = +`${c}`;
-            d = +`${d}`;
-            e = c < d;
-          } catch (m) {
-            throw new Error('ERROR at line '+($+1));
+          var c = parseStr(`*${b[1].split('*')[1]}*`, g || {});
+          var d = parseStr(`*${b[1].split('*')[3]}*`, g || {});
+          var e = false;
+          switch (b[1].split('*')[2].split('*')[0]) {
+            case '=':
+              e = c == d;
+              break;
+            case '=/':
+              e = c != d;
+              break;
+            case '<~':
+              try {
+                c = +`${c}`;
+                d = +`${d}`;
+                e = c < d;
+              } catch (m) {
+                throw new Error('ERROR');
+              }
           }
-        }
-        if (!e) {
-          ifs[`${Object.keys(ifs).length}`] = Number(b[1].split('*')[4].replace('#', '').replace(')', ''));
-        }
-        break;
+          if (!e) {
+            ifs[`${Object.keys(ifs).length}`] = Number(b[1].split('*')[4].replace('#', '').replace(')', ''));
+          }
+          break;
         case 'Fedora':
-        console.log(parseStr(replaceLast(b[1], ')', '')));
-        break;
+          console.log(parseStr(replaceLast(b[1], ')', ''), g || {}));
+          break;
         case 'Pop!_OS':
-        var d = [];
-        for (var c = 0; c < Number(b[1].split('#')[1].replace(')', '')); c++) {
-          d.push(cd[$ + (c + 1)]);
-        }
-        for (var c = 1; c < Number(b[1].split('#')[0]); c++) {
-          compile(d.join('\n'));
-        }
-        break;
+          var d = [];
+          for (var c = 0; c < Number(b[1].split('#')[1].replace(')', '')); c++) {
+            d.push(cd[$ + (c + 1)]);
+          }
+          for (var c = 0; c < Number(b[1].split('#')[0]); c++) {
+            compile(d.join('\n'), { currentindex: c });
+          }
+          ifs[`${Object.keys(ifs).length}`] = Number(b[1].split('#')[1].replace(')', ''));
+          break;
         case 'Debian':
-        var c = parseStr(`*${b[1].split('*')[1]}*`);
-        var d = parseStr(`*${b[1].split('*')[3]}*`);
-        var e = false;
-        var l = [];
-        for (var x = 0; x < Number(b[1].split('#')[1].replace(')', '')); x++) {
-          l.push(cd[$ + (x + 1)]);
-        }
-        switch (b[1].split('*')[2].split('*')[0]) {
-          case '=':
-          while (c == d) {
-            compile(l.join('\n'));
+          var c = parseStr(`*${b[1].split('*')[1]}*`, g || {});
+          var d = parseStr(`*${b[1].split('*')[3]}*`, g || {});
+          var e = false;
+          var l = [];
+          for (var x = 0; x < Number(b[1].split('#')[1].replace(')', '')); x++) {
+            l.push(cd[$ + (x + 1)]);
+          }
+          switch (b[1].split('*')[2].split('*')[0]) {
+            case '=':
+              while (c == d) {
+                compile(l.join('\n'));
+              }
+              break;
+            case '=/':
+              while (c != d) {
+                compile(l.join('\n'));
+              }
+              break;
+            case '<~':
+              try {
+                c = +`${c}`;
+                d = +`${d}`;
+                while (c < d) {
+                  compile(l.join('\n'));
+                }
+              } catch (m) {
+                throw new Error('ERROR');
+              }
           }
           break;
-          case '=/':
-          while (c != d) {
-            compile(l.join('\n'));
-          }
-          break;
-          case '<~':
-          try {
-            c = +`${c}`;
-            d = +`${d}`;
-            while (c < d) {
-              compile(l.join('\n'));
-            }
-          } catch (m) {
-            throw new Error('ERROR at line '+($+1));
-          }
-        }
-        break;
+          /*  case 'GTK':
+              var c = b[1].split('*')[1];
+              ifs[`${Object.keys(ifs).length}`] = Number(c);
+              var l = [];
+              for (var x = 0; x < Number(c); x++) {
+                l.push(cd[$ + (x + 1)]);
+              }
+              break;
+            case 'KDE':
+              compile(`Linux(*<@a@>*)`, {
+                a: '44'
+              })*/
         case 'RaspberryPiOS':
-        var c = parseStr(`*${b[1].split('*')[1]}*`);
-        var d = parseStr(`*${b[1].split('*')[3]}*`);
-        var encod = new TextEncoder();
-        var dat = encod.encode(d);
-        Deno.writeFileSync(c, dat);
-        break;
+          var c = parseStr(`*${b[1].split('*')[1]}*`);
+          var d = parseStr(`*${b[1].split('*')[3]}*`);
+          var encod = new TextEncoder();
+          var dat = encod.encode(d);
+          Deno.writeFileSync(c, dat);
+          break;
         case 'Manjaro':
-        var c = parseStr(`*${b[1].split('*')[1]}*`);
-        var d = parseStr(`*${b[1].split('*')[3]}*`);
-        var enco = new TextEncoder();
-        var dat = enco.encode(d);
-        try {
-          Deno.writeFileSync(c, dat, {create: false});
-        } catch(e) {
-          throw new Error('Error at line '+($+1))
-        }
-        break;
+          var c = parseStr(`*${b[1].split('*')[1]}*`);
+          var d = parseStr(`*${b[1].split('*')[3]}*`);
+          var enco = new TextEncoder();
+          var dat = enco.encode(d);
+          try {
+            Deno.writeFileSync(c, dat, { create: false });
+          } catch (e) {
+            throw new Error('Error at line ' + ($ + 1))
+          }
+          break;
         case 'Ubuntu':
-        var c = parseStr(`*${b[1].split('*')[1]}*`);
-        try {
-          Deno.removeSync(c, {recursive: true});
-        } catch(e) {
-          throw new Error('Error at line '+($+1))
-        }
-        break;
+          var c = parseStr(`*${b[1].split('*')[1]}*`);
+          try {
+            Deno.removeSync(c, { recursive: true });
+          } catch (e) {
+            throw new Error('Error at line ' + ($ + 1))
+          }
+          break;
         case 'ZorinOS':
-        var c = parseStr(`*${b[1].split('*')[1]}*`);
-        try {
-          Deno.mkdirSync(c);
-        } catch(e) {
-          throw new Error('Error at line '+($+1))
-        }
+          var c = parseStr(`*${b[1].split('*')[1]}*`);
+          try {
+            Deno.mkdirSync(c);
+          } catch (e) {
+            throw new Error('Error at line ' + ($ + 1))
+          }
       }
     }
   })
 }
 
-function parseStr(a) {
+
+function parseStr(a, b) {
   if (a.startsWith('*') && a.endsWith('*')) {
     a = a.replace('*', '');
     a = replaceLast(a, '*', '');
-    a = parseVars(a);
+    a = parseVars(a, b);
     [...(a.matchAll(/\<\!prompt (.*?)\!\>/g))].forEach((v, i, r) => {
-      a = a.replace(v[0], prompt('[INPUT] ' + v[1]));
+      a = a.replace(v[0], prompt(v[1]));
     });
     [...(a.matchAll(/\<\!confirm (.*?)\!\>/g))].forEach((v, i, r) => {
-      a = a.replace(v[0], confirm('[CONFIRM] ' + v[1]));
-    });
-    [...(a.matchAll(/\<\!opensuse (.*?)\!\>/g))].forEach((v, i, r) => {
-      var decode = new TextDecoder("utf-8");
-      var dat = Deno.readFileSync(v[1]);
-      a = a.replace(v[0], decode.decode(dat));
+      a = a.replace(v[0], confirm(v[1]));
     });
     [...(a.matchAll(/\<\!deepin\.enc (.*?)\!\>/g))].forEach((v, i, r) => {
       a = a.replace(v[0], btoa(v[1]));
@@ -174,24 +183,27 @@ function parseStr(a) {
     [...(a.matchAll(/\<\!deepin\.dec (.*?)\!\>/g))].forEach((v, i, r) => {
       a = a.replace(v[0], atob(v[1]));
     });
+    var parser = new exprEval.Parser({
+      operators: {
+        logical: false,
+        comparison: false
+      }
+    });
+    [...(a.matchAll(/\<\!math (.*?)\!\>/g))].forEach((v, i, r) => {
+      a = a.replace(v[0], parser.parse(v[1]).evaluate());
+    });
     return a;
   } else {
     return 'Oops.';
   }
 }
 
-function parseVars(a) {
+function parseVars(a, b) {
   Object.keys(vars).forEach(v => {
     a = a.replaceAll(`<|${v}|>`, vars[v]);
   });
-  var parser = new Parser({
-    operators: {
-      logical: false,
-      comparison: false
-    }
-  });
-  [...(a.matchAll(/\<\!math (.*?)\!\>/g))].forEach((v, i, r) => {
-    a = a.replace(v[0], parser.parse(v[1]).evaluate());
-  });
+  Object.keys(b).forEach(v => {
+    a = a.replaceAll(`<@${v}@>`, b[v]);
+  })
   return a;
 }
