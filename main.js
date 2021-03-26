@@ -126,6 +126,15 @@ function parseStr(a, b) {
     [...(a.matchAll(/\<\!deepin\.dec (.*?)\!\>/g))].forEach((v, i, r) => {
       a = a.replace(v[0], atob(v[1]));
     });
+    var parser = new exprEval.Parser({
+      operators: {
+        logical: false,
+        comparison: false
+      }
+    });
+    [...(a.matchAll(/\<\!math (.*?)\!\>/g))].forEach((v, i, r) => {
+      a = a.replace(v[0], parser.parse(v[1]).evaluate());
+    });
     return a;
   } else {
     return 'Oops.';
@@ -139,14 +148,5 @@ function parseVars(a, b) {
   Object.keys(b).forEach(v => {
     a = a.replaceAll(`<@${v}@>`, b[v]);
   })
-  var parser = new exprEval.Parser({
-    operators: {
-      logical: false,
-      comparison: false
-    }
-  });
-  [...(a.matchAll(/\<\!math (.*?)\!\>/g))].forEach((v, i, r) => {
-    a = a.replace(v[0], parser.parse(v[1]).evaluate());
-  });
   return a;
 }
