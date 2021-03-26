@@ -5,8 +5,8 @@ var ifs = {};
 
 try {
   const decoder = new TextDecoder("utf-8");
-  const data = Deno.readFileSync(Deno.args[0]);
   try {
+    const data = Deno.readFileSync(Deno.args[0]);
     compile(decoder.decode(data));
   } catch(e) {
     console.log('Compile Error');
