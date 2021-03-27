@@ -1,6 +1,6 @@
 <img src="nlang.png" alt="nothinglang" align="center">
 
-### nothinglang
+# nothinglang
 The most useless programming language ever with a complicated syntax  
 and yes, everything is linux 🐧  
 it's case-sensitive anyways  
@@ -8,6 +8,7 @@ it's case-sensitive anyways
 Nothinglang compiles to JS, so JS errors also, obviously exist.  
 And, obviously, it's really bad
 ___
+## Guide
 [📖 Guide](guide.md)
 
 ___
