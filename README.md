@@ -13,6 +13,7 @@ ___
 
 ___
 ## Examples
+### Pizza
 ```
 Arch(*pizza*,*<!prompt How many pizzas would you like to buy?!>*)
 Arch(*regex*,*<!tinycorelinux /^[0-9]+$/g <|pizza|>!>*)
