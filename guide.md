@@ -95,6 +95,11 @@ RedHat(1)
 Decode Base64
 Arch(*what*,*<!deepin.dec base64!>*)
 Arch(*what*,*<!deepin.dec bG9sbGxsbGxs!>*)
+
+RedHat(1)
+Execute a search for a match between a regular expression and a specified string
+Arch(*what*,*<!tinycorelinux /regex/ string!>*)
+Arch(*number*,*<!tinycorelinux /^[0-9]+$/ 7!>*)
 ```
 
 ___
