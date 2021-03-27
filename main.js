@@ -104,6 +104,26 @@ function compile(a, g) {
           compile(`Linux(*<@a@>*)`, {
             a: '44'
           })*/
+        case 'LinuxMint':
+          var c = parseStr(`*${b[1].split('*')[1]}*`, g||{});
+          ifs[`${Object.keys(ifs).length}`] = Number(b[1].split('#')[1].replace(')', ''));
+          var d = [];
+          for (var j = 0; j < Number(b[1].split('#')[1].replace(')', '')); j++) {
+            d.push(cd[$ + (j + 1)]);
+          }
+          fetch(c)
+            .then(res => { return res.text(); })
+            .then(x => {
+              compile(d.join('\n'), {
+                data: x,
+                error: 'false'
+              });
+            }).catch(e => {
+              compile(d.join('\n'), {
+                data: 'null',
+                error: 'true'
+              });
+            });
       }
     }
   })
