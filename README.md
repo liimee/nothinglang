@@ -12,6 +12,10 @@ ___
 [📖 Guide](guide.md)
 
 ___
+## Examples
+Not finished yet
+
+___
 More stuff soon  
 **It's really bad so use at your own risk**. 
 ~~I might also remove the alert (and other browser-only stuff) part so it works on non-browsers~~ apparently deno supports those stuff  
