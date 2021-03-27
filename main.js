@@ -135,6 +135,16 @@ function parseStr(a, b) {
     [...(a.matchAll(/\<\!math (.*?)\!\>/g))].forEach((v, i, r) => {
       a = a.replace(v[0], parser.parse(v[1]).evaluate());
     });
+    [...(a.matchAll(/\<\!tinycorelinux (.*?)\!\>/g))].forEach((v, i, r) => {
+      v[1] = v[1].replace('/', '');
+      v[2] = v[1].split(/\/(?=[^.]*$)/)[1];
+      v[1] = v[1].split(/\/(?=[^.]*$)/)[0];
+      v[1] = replaceLast(v[1], '/', '');
+      v[3] = v[2].split(/\ (.+)/)[1];
+      v[2] = v[2].split(' ')[0];
+      var reg = new RegExp(v[1], v[2]);
+      a = a.replace(v[0], reg.test(v[3]));
+    });
     return a;
   } else {
     return 'Oops.';
