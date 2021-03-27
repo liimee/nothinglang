@@ -21,6 +21,7 @@ Linux(*Please insert only numbers.*)
 Elementary(*<|regex|>*=*true*#1)
 Linux(*That would be $<!math <|pizza|>*5!>*)
 ```
+More examples soon 🔜
 
 ___
 More stuff soon  
