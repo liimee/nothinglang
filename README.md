@@ -13,7 +13,14 @@ ___
 
 ___
 ## Examples
-Not finished yet
+```
+Arch(*pizza*,*<!prompt How many pizzas would you like to buy?!>*)
+Arch(*regex*,*<!tinycorelinux /^[0-9]+$/g <|pizza|>!>*)
+Elementary(*<|regex|>*=/*true*#1)
+Linux(*Please insert only numbers.*)
+Elementary(*<|regex|>*=*true*#1)
+Linux(*That would be $<!math <|pizza|>*5!>*)
+```
 
 ___
 More stuff soon  
