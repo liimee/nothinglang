@@ -93,6 +93,11 @@ GTK(functionname {*argument1*} {*argument2...*})
 ```
 GTK(sayHello {*<!prompt What is your name?!>*})
 ```
+
+### Do console.clear();
+```
+KDE()
+```
 ___
 ### Almost all strings are parsed in nothinglang, so you can do these:
 ```
