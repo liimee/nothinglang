@@ -18,15 +18,15 @@ function compile(a, g) {
       var b = v.split(/\((.+)/);
       switch (b[0]) {
         case 'Linux':
-          alert(parseStr(replaceLast(b[1], ')', ''), g||{}));
+          alert(parseStr(replaceLast(b[1], ')', ''), g || {}));
           break;
         case 'Arch':
           if (b[1].split('*')[1].split('*')[0].includes(',')) throw new Error(`Invalid variable name`);
-          vars[parseStr(b[1].split(',')[0], g||{})] = parseStr(replaceLast(b[1], ')', '').split(',')[1], g||{});
+          vars[parseStr(b[1].split(',')[0], g || {})] = parseStr(replaceLast(b[1], ')', '').split(',')[1], g || {});
           break;
         case 'Elementary':
-          var c = parseStr(`*${b[1].split('*')[1]}*`, g||{});
-          var d = parseStr(`*${b[1].split('*')[3]}*`, g||{});
+          var c = parseStr(`*${b[1].split('*')[1]}*`, g || {});
+          var d = parseStr(`*${b[1].split('*')[3]}*`, g || {});
           var e = false;
           switch (b[1].split('*')[2].split('*')[0]) {
             case '=':
@@ -49,7 +49,7 @@ function compile(a, g) {
           }
           break;
         case 'Fedora':
-          console.log(parseStr(replaceLast(b[1], ')', ''), g||{}));
+          console.log(parseStr(replaceLast(b[1], ')', ''), g || {}));
           break;
         case 'Pop!_OS':
           var d = [];
@@ -62,8 +62,8 @@ function compile(a, g) {
           ifs[`${Object.keys(ifs).length}`] = Number(b[1].split('#')[1].replace(')', ''));
           break;
         case 'Debian':
-          var c = parseStr(`*${b[1].split('*')[1]}*`, g||{});
-          var d = parseStr(`*${b[1].split('*')[3]}*`, g||{});
+          var c = parseStr(`*${b[1].split('*')[1]}*`, g || {});
+          var d = parseStr(`*${b[1].split('*')[3]}*`, g || {});
           var e = false;
           var l = [];
           for (var x = 0; x < Number(b[1].split('#')[1].replace(')', '')); x++) {
@@ -92,20 +92,20 @@ function compile(a, g) {
               }
           }
           break;
-      /*  case 'GTK':
-          var c = b[1].split('*')[1];
-          ifs[`${Object.keys(ifs).length}`] = Number(c);
-          var l = [];
-          for (var x = 0; x < Number(c); x++) {
-            l.push(cd[$ + (x + 1)]);
-          }
-          break;
-        case 'KDE':
-          compile(`Linux(*<@a@>*)`, {
-            a: '44'
-          })*/
+          /*  case 'GTK':
+              var c = b[1].split('*')[1];
+              ifs[`${Object.keys(ifs).length}`] = Number(c);
+              var l = [];
+              for (var x = 0; x < Number(c); x++) {
+                l.push(cd[$ + (x + 1)]);
+              }
+              break;
+            case 'KDE':
+              compile(`Linux(*<@a@>*)`, {
+                a: '44'
+              })*/
         case 'LinuxMint':
-          var c = parseStr(`*${b[1].split('*')[1]}*`, g||{});
+          var c = parseStr(`*${b[1].split('*')[1]}*`, g || {});
           ifs[`${Object.keys(ifs).length}`] = Number(b[1].split('#')[1].replace(')', ''));
           var d = [];
           for (var j = 0; j < Number(b[1].split('#')[1].replace(')', '')); j++) {
@@ -124,6 +124,42 @@ function compile(a, g) {
                 error: 'true'
               });
             });
+          break;
+
+        case 'GarudaLinux':
+          b[1] = replaceLast(b[1], ')', '');
+          var e = b[1].split(' ')[0];
+          var c = b[1].split(/(.*)\#(.*)/);
+          var d = c[1].split(' ');
+          c = c[2];
+          ifs[`${Object.keys(ifs).length}`] = c;
+          var l = [];
+          for (var x = 0; x < c; x++) {
+            l.push(cd[$ + (x + 1)]);
+          }
+          d.shift();
+          funcs[e] = {
+            args: d,
+            ar: l
+          };
+          break;
+        case 'GTK':
+          var c = b[1].split(' ')[0];
+          if (!(c in funcs)) throw new Error(c + 'is not defined (line ' + $ + ')');
+          var d = replaceLast(b[1], ')', '');
+          var e = [];
+          d = d.split(/\ (?![^\{]*\})/g);
+          d.shift();
+          d.forEach(v => {
+            e.push(v);
+          });
+          var f = {};
+          funcs[c].args.forEach((rv, o) => {
+            var p = replaceLast(e[o], '}', '');
+            p = p.replace('{', '');
+            f[rv] = parseStr(p, g || {})
+          });
+          compile(funcs[c].ar.join('\n'), f);
       }
     }
   })
