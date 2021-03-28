@@ -85,6 +85,14 @@ GarudaLinux(functionname argument1 argument2...#number-of-lines-since-current)
 GarudaLinux(sayHello name#1)
 Linux(*Hello, <@name@>*)
 ```
+
+### Call a function (experimental)
+```
+GTK(functionname {*argument1*} {*argument2...*})
+```
+```
+GTK(sayHello {*<!prompt What is your name?!>*})
+```
 ___
 ### Almost all strings are parsed in nothinglang, so you can do these:
 ```
