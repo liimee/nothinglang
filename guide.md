@@ -76,6 +76,15 @@ Elementary(*<@error@>*=*false*#2)
 Linux(*Success!*)
 Linux(*Data: <@data@>*)
 ```
+
+### Declare a Function (experimental)
+```
+GarudaLinux(functionname argument1 argument2...#number-of-lines-since-current)
+```
+```
+GarudaLinux(sayHello name#1)
+Linux(*Hello, <@name@>*)
+```
 ___
 ### Almost all strings are parsed in nothinglang, so you can do these:
 ```
