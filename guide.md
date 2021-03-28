@@ -63,6 +63,19 @@ RedHat(1)
 this text will be ignored
 this text will not be ignored
 ```
+
+### Fetch Data (Experimental):
+```
+LinuxMint(*url*#number-of-lines-since-current)
+```
+```
+LinuxMint(*someurlhere*#5)
+Elementary(*<@error@>*=*true*#1)
+Linux(*Failed!*)
+Elementary(*<@error@>*=*false*#2)
+Linux(*Success!*)
+Linux(*Data: <@data@>*)
+```
 ___
 ### Almost all strings are parsed in nothinglang, so you can do these:
 ```
