@@ -160,6 +160,9 @@ function compile(a, g) {
             f[rv] = parseStr(p, g || {})
           });
           compile(funcs[c].ar.join('\n'), f);
+          break;
+        case 'KDE':
+          console.clear();
       }
     }
   })
