@@ -146,7 +146,7 @@ To run your code, open up a terminal and use this command (make sure [Deno](http
 ```shell
 deno run --allow-read https://raw.githubusercontent.com/liimee/nothinglang/nothinglang/deno.js filename.nothing
 ```
-or download a binary [here](https://github.com/liimee/nothinglang/releases), unzip, then do `./nothinglang file.nothing`.  
+or download a binary [here](https://github.com/liimee/nothinglang/releases), unzip, then do `./nothinglang file.nothing` (it does work even when you don't have Deno installed).  
 
 The `--allow-read` flag is necessary.  
 
