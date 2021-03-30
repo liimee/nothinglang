@@ -4,7 +4,7 @@
 Linux(*Pizza*)
 ```
 
-### Declare (and modify) a variable:
+### Declare (and modify) a (global) variable:
 ```
 Arch(*name*,*value*)
 ```
