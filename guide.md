@@ -88,10 +88,10 @@ Linux(*Hello, <@name@>*)
 
 ### Call a function (experimental)
 ```
-GTK(functionname {*argument1*} {*argument2...*})
+GTK(functionname *argument1* *argument2...*)
 ```
 ```
-GTK(sayHello {*<!prompt What is your name?!>*})
+GTK(sayHello *<!prompt What is your name?!>*)
 ```
 
 ### Do console.clear();
