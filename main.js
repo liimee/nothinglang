@@ -148,16 +148,15 @@ function compile(a, g) {
           if (!(c in funcs)) throw new Error(c + 'is not defined (line ' + $ + ')');
           var d = replaceLast(b[1], ')', '');
           var e = [];
-          d = d.split(/\ (?![^\{]*\})/g);
-          d.shift();
+          d = d.replace(`${c} `, '');
+          d = d.slice(1, d.length-1);
+          d = d.split(/\* \*/g);
           d.forEach(v => {
             e.push(v);
           });
           var f = {};
           funcs[c].args.forEach((rv, o) => {
-            var p = replaceLast(e[o], '}', '');
-            p = p.replace('{', '');
-            f[rv] = parseStr(p, g || {})
+            f[rv] = parseStr('*' + e[o] + '*', g || {})
           });
           compile(funcs[c].ar.join('\n'), f);
           break;

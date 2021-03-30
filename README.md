@@ -1,7 +1,7 @@
 <img src="nlang.png" alt="nothinglang" align="center">
 
 # nothinglang
-The most useless programming language ever with a complicated syntax  
+a useless programming language that just "works"  
 and yes, everything is linux 🐧  
 it's case-sensitive anyways  
 
