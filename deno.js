@@ -269,6 +269,11 @@ function parseVars(a, b) {
   });
   Object.keys(b).forEach(v => {
     a = a.replaceAll(`<@${v}@>`, b[v]);
-  })
+  });
+  [...(a.matchAll(/\<\!opensuse (.*?)\!\>/g))].forEach((v, i, r) => {
+    var decode = new TextDecoder("utf-8");
+    var dat = Deno.readFileSync(v[1]);
+    a = a.replace(v[0], decode.decode(dat));
+  });
   return a;
 }
