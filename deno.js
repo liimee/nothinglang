@@ -277,5 +277,3 @@ function parseVars(a, b) {
   });
   return a;
 }
-
-//test
