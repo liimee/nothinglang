@@ -1,3 +1,6 @@
+![GIF](min.gif)
+
+___
 ## Basic Functions
 ### Alert:
 ```
