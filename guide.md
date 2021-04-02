@@ -153,6 +153,8 @@ or download a binary [here](https://github.com/liimee/nothinglang/releases), unz
 
 The `--allow-read` flag is necessary.  
 
+You also need to add `--experimental` if you want to use experimental features. (e.g. `deno run --allow-read https://raw.githubusercontent.com/liimee/nothinglang/nothinglang/deno.js filename.nothing --experimental`)  
+
 ___
 ### Read files
 ```
