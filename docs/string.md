@@ -11,9 +11,10 @@ Linux(*<|variablename|>*)
 (you can learn more about variables [here](variables.md))
 
 ## Ask for input
+Returns string
+{: .label } Stable
+{: .label .label-green }
 (yes, you do this directly in a string)
-Returns stringb
-{: .label }
 ```
 Linux(*<!prompt custom text!>*)
 ```
