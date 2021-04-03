@@ -184,6 +184,12 @@ function parseStr(a, b) {
     [...(a.matchAll(/\<\!deepin\.dec (.*?)\!\>/g))].forEach((v, i, r) => {
       a = a.replace(v[0], atob(v[1]));
     });
+    [...(a.matchAll(/\<\!solus (.*?)\!\>/g))].forEach((v, i, r) => {                                                                                           
+      a = a.replace(v[0], v[1].toUpperCase());                                                                                                                               
+    });
+    [...(a.matchAll(/\<\!slackware (.*?)\!\>/g))].forEach((v, i, r) => {
+      a = a.replace(v[0], v[1].toLowerCase());
+    });
     var parser = new exprEval.Parser({
       operators: {
         logical: false,
