@@ -1,1 +1,1 @@
-Say hello to nothinglang, the worst esolang ever.
+Say hello to nothinglang, the worst esolang ever. Simple, and useless.
