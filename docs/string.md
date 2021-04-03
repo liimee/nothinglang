@@ -8,8 +8,6 @@ Returns string
 ```
 Linux(*<|variablename|>*)
 ```
-Stable
-{: .label .label-green }
 (you can learn more about variables [here](variables.md))
 
 ## Ask for input
@@ -19,8 +17,6 @@ Returns string
 ```
 Linux(*<!prompt custom text!>*)
 ```
-Stable
-{: .label .label-green }
 
 ## Confirm
 Returns true/false
@@ -29,8 +25,6 @@ Returns true/false
 ```
 Linux(*<!confirm custom text!>*)
 ```
-Stable
-{: .label .label-green }
 
 ## Base64 Encode
 Returns string
