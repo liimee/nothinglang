@@ -9,7 +9,7 @@ Nothinglang compiles to JS, so JS errors also, obviously exist.
 And, obviously, it's really bad
 ___
 ## Guide
-[📖 Guide](guide.md)
+[📖 Guide](https://liimee.github.io/nothinglang)
 
 ___
 More stuff soon  
