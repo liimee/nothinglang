@@ -1,2 +1,0 @@
-# Nothinglang
-Say hello to nothinglang, the worst esolang ever. Simple, and useless.
