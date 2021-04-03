@@ -13,6 +13,7 @@ Linux(*<|variablename|>*)
 ## Ask for input
 Returns string
 {: .label }
+
 Stable
 {: .label .label-green }
 (yes, you do this directly in a string)
