@@ -3,6 +3,8 @@ Everything is a string in nothinglang (well mostly). And in nothinglang, every s
 
 ___
 ## Get variable value
+Returns string
+{: .label }
 ```
 Linux(*<|variablename|>*)
 ```
@@ -10,27 +12,37 @@ Linux(*<|variablename|>*)
 
 ## Ask for input
 (yes, you do this directly in a string)
+Returns stringb
+{: .label }
 ```
 Linux(*<!prompt custom text!>*)
 ```
 
 ## Confirm
+Returns true/false
+{: .label .label-purple }
 (yes, you do this directly in a string too)
 ```
 Linux(*<!confirm custom text!>*)
 ```
 
 ## Base64 Encode
+Returns string
+{: .label }
 ```
 Linux(*<!deepin.enc text!>*)
 ```
 
 ## Base64 Decode
+Returns string
+{: .label }
 ```
 Linux(*<!deepin.dec base64 text!>*)
 ```
 
 ## Evaluate math expression
+Returns number
+{: .label .label-yellow }
 ```
 Linux(*<!math mathexpression!>*)
 ```
