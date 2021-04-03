@@ -1,5 +1,6 @@
 import { Parser } from 'https://jspm.dev/expr-eval';
 
+var exp = false;
 var vars = {};
 var ifs = {};
 var funcs = {};
@@ -8,7 +9,8 @@ try {
   const decoder = new TextDecoder("utf-8");
   try {
     const data = Deno.readFileSync(Deno.args[0]);
-    compile(decoder.decode(data));
+    if(Deno.args.includes('--experimental')) exp = true;
+    compile(decoder.decode(data)); 
   } catch (e) {
     console.log('Compile Error');
     console.log(e);
@@ -117,25 +119,25 @@ function compile(a, g) {
           }
           break;
         case 'RaspberryPiOS':
-          var c = parseStr(`*${b[1].split('*')[1]}*`);
-          var d = parseStr(`*${b[1].split('*')[3]}*`);
+          var c = parseStr(`*${b[1].split('*')[1]}*`, g||{});
+          var d = parseStr(`*${b[1].split('*')[3]}*`, g||{});
           var encod = new TextEncoder();
           var dat = encod.encode(d);
           Deno.writeFileSync(c, dat);
           break;
         case 'Manjaro':
-          var c = parseStr(`*${b[1].split('*')[1]}*`);
-          var d = parseStr(`*${b[1].split('*')[3]}*`);
+          var c = parseStr(`*${b[1].split('*')[1]}*`, g||{});
+          var d = parseStr(`*${b[1].split('*')[3]}*`, g||{});
           var enco = new TextEncoder();
           var dat = enco.encode(d);
           try {
             Deno.writeFileSync(c, dat, { create: false });
           } catch (e) {
-            throw new Error('Error at line ' + ($ + 1))
+            throw new Error('Error at line ' + ($ + 1) + '. Probably the file does not exist.');
           }
           break;
         case 'Ubuntu':
-          var c = parseStr(`*${b[1].split('*')[1]}*`);
+          var c = parseStr(`*${b[1].split('*')[1]}*`, g||{});
           try {
             Deno.removeSync(c, { recursive: true });
           } catch (e) {
@@ -143,7 +145,7 @@ function compile(a, g) {
           }
           break;
         case 'ZorinOS':
-          var c = parseStr(`*${b[1].split('*')[1]}*`);
+          var c = parseStr(`*${b[1].split('*')[1]}*`, g||{});
           try {
             Deno.mkdirSync(c);
           } catch (e) {
@@ -151,6 +153,7 @@ function compile(a, g) {
           }
           break;
         case 'LinuxMint':
+          if(!exp) throw new Error(`You used an experimental feature, but experimental features is not enabled. To enable experimental features, add the --experimental flag. (error at line ${$ + 1})`);
           var c = parseStr(`*${b[1].split('*')[1]}*`, g || {});
           ifs[`${Object.keys(ifs).length}`] = Number(b[1].split('#')[1].replace(')', ''));
           var d = [];
@@ -172,6 +175,7 @@ function compile(a, g) {
             });
           break;
         case 'GarudaLinux':
+          if(!exp) throw new Error(`You used an experimental feature, but experimental features is not enabled. To enable experimental features, add the --experimental flag. (error at line ${$ + 1})`);
           b[1] = replaceLast(b[1], ')', '');
           var e = b[1].split(' ')[0];
           var c = b[1].split(/(.*)\#(.*)/);
@@ -189,6 +193,7 @@ function compile(a, g) {
           };
           break;
         case 'GTK':
+          if(!exp) throw new Error(`You used an experimental feature, but experimental features is not enabled. To enable experimental features, add the --experimental flag. (error at line ${$ + 1})`);
           var c = b[1].split(' ')[0];
           if (!(c in funcs)) throw new Error(c + 'is not defined (line ' + $ + ')');
           var d = replaceLast(b[1], ')', '');

@@ -1,3 +1,6 @@
+![GIF](min.gif)
+
+___
 ## Basic Functions
 ### Alert:
 ```
@@ -149,6 +152,8 @@ deno run --allow-read https://raw.githubusercontent.com/liimee/nothinglang/nothi
 or download a binary [here](https://github.com/liimee/nothinglang/releases), unzip, then do `./nothinglang file.nothing` (it does work even when you don't have Deno installed).  
 
 The `--allow-read` flag is necessary.  
+
+You also need to add `--experimental` if you want to use experimental features. (e.g. `deno run --allow-read https://raw.githubusercontent.com/liimee/nothinglang/nothinglang/deno.js filename.nothing --experimental`)  
 
 ___
 ### Read files
