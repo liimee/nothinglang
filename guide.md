@@ -138,6 +138,16 @@ RedHat(1)
 Execute a search for a match between a regular expression and a specified string
 Arch(*what*,*<!tinycorelinux /regex/ string!>*)
 Arch(*number*,*<!tinycorelinux /^[0-9]+$/ 7!>*)
+
+RedHat(1)
+Convert string to uppercase
+Arch(*what*,*<!solus string!>*)
+Arch(*what*,*<!solus hello!!>*)
+
+RedHat(1)
+Convert string to lowercase
+Arch(*what*,*<!slackware string!>*)
+Arch(*what*,*<!slackware SHRUG!>*)
 ```
 
 ___
