@@ -1,6 +1,7 @@
-![GIF](min.gif)
+![Preview](dno.gif)
 
 ___
+
 ## Basic Functions
 ### Alert:
 ```
@@ -151,19 +152,11 @@ Arch(*what*,*<!slackware SHRUG!>*)
 ```
 
 ___
-## Deno-version-only Functions
-![Preview](dno.gif)  
+## Filesystem-related functions
 
-___  
-To run your code, open up a terminal and use this command (make sure [Deno](https://deno.land) is installed)
-```shell
-deno run --allow-read https://raw.githubusercontent.com/liimee/nothinglang/nothinglang/deno.js filename.nothing
-```
-or download a binary [here](https://github.com/liimee/nothinglang/releases), unzip, then do `./nothinglang file.nothing` (it does work even when you don't have Deno installed).  
+To run your code, download a binary [here](https://github.com/liimee/nothinglang/releases), unzip, then do `./nothinglang file.nothing`. It doesn't have a built-in update function (yet.)  
 
-The `--allow-read` flag is necessary.  
-
-You also need to add `--experimental` if you want to use experimental features. (e.g. `deno run --allow-read https://raw.githubusercontent.com/liimee/nothinglang/nothinglang/deno.js filename.nothing --experimental`)  
+You also need to add `--experimental` if you want to use experimental features.  
 
 ___
 ### Read files
@@ -194,10 +187,3 @@ Ubuntu(*thingy.txt*)
 ZorinOS(*dirname*)
 ZorinOS(*Collections*)
 ```
-
-___
-## Functions that requires the `--allow-write` flag (see [this](https://deno.land/manual/getting_started/permissions#permissions-list))
-- `RaspberryPiOS`
-- `Manjaro`
-- `Ubuntu`
-- `ZorinOS`
