@@ -2,7 +2,7 @@
 
 ___
 
-## Basic Functions
+# Basic Functions
 ### Alert:
 ```
 Linux(*Pizza*)
