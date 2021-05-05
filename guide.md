@@ -152,13 +152,7 @@ Arch(*what*,*<!slackware SHRUG!>*)
 ```
 
 ___
-## Filesystem-related functions
-
-To run your code, download a binary [here](https://github.com/liimee/nothinglang/releases), unzip, then do `./nothinglang file.nothing`. It doesn't have a built-in update function (yet.)  
-
-You also need to add `--experimental` if you want to use experimental features.  
-
-___
+## Filesystem-related functions  
 ### Read files
 ```
 Arch(*file*,*<!opensuse filename.fileext!>*)
@@ -187,3 +181,10 @@ Ubuntu(*thingy.txt*)
 ZorinOS(*dirname*)
 ZorinOS(*Collections*)
 ```
+
+___
+
+## Running your code
+To run your code, download a binary [here](https://github.com/liimee/nothinglang/releases), unzip, then do `./nothinglang file.nothing`. It doesn't have a built-in update function (yet.)  
+
+You also need to add `--experimental` if you want to use experimental features.  
