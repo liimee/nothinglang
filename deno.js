@@ -1,5 +1,6 @@
 import { Parser } from 'https://jspm.dev/expr-eval';
 import { isURL } from "https://deno.land/x/is_url/mod.ts";
+import { unZipFromURL } from 'https://deno.land/x/zip@v1.1.1/mod.ts'
 
 var exp = false;
 var vars = {};
@@ -7,23 +8,36 @@ var ifs = {};
 var funcs = {};
 var args = [];
 
-try {
-  const decoder = new TextDecoder("utf-8");
+if(Deno.args.includes('update')) {
+  fetch('https://api.github.com/repos/liimee/nothinglang/releases')
+  .then(res => {return res.json()})
+  .then(data => {
+    var fore = +data[0].tag_name.replace('-rc', '');
+    if(fore > 0.7) update(data)
+  })
+
+  function update(data) {
+    unZipFromURL(data[0].assets[0].browser_download_url)
+  }
+} else {
   try {
-    const data = Deno.readFileSync(Deno.args[0]);
-    args = [...Deno.args];
-    if(Deno.args.includes('--experimental')) { exp = true; args.shift(); }
-    args.shift();
-    compile(decoder.decode(data));
+    const decoder = new TextDecoder("utf-8");
+    try {
+      const data = Deno.readFileSync(Deno.args[0]);
+      args = [...Deno.args];
+      if(Deno.args.includes('--experimental')) { exp = true; args.shift(); }
+      args.shift();
+      compile(decoder.decode(data));
+    } catch (e) {
+      console.log('Compile Error');
+      console.log(e);
+      Deno.exit(1);
+    }
   } catch (e) {
-    console.log('Compile Error');
+    console.log('Error');
     console.log(e);
     Deno.exit(1);
   }
-} catch (e) {
-  console.log('Error');
-  console.log(e);
-  Deno.exit(1);
 }
 
 function replaceLast(a, b, c) {
@@ -48,182 +62,192 @@ function compile(a, g) {
       var b = v.split(/\((.+)/);
       switch (b[0]) {
         case 'Linux':
-          alert(parseStr(replaceLast(b[1], ')', ''), g || {}));
-          break;
+        alert(parseStr(replaceLast(b[1], ')', ''), g || {}));
+        break;
         case 'Arch':
-          if (b[1].split('*')[1].split('*')[0].includes(',')) throw new Error(`Invalid variable name`);
-          vars[parseStr(b[1].split(',')[0], g || {})] = parseStr(replaceLast(b[1], ')', '').split(',')[1], g || {});
-          break;
+        if (b[1].split('*')[1].split('*')[0].includes(',')) throw new Error(`Invalid variable name`);
+        vars[parseStr(b[1].split(',')[0], g || {})] = parseStr(replaceLast(b[1], ')', '').split(',')[1], g || {});
+        break;
         case 'Elementary':
-          var c = parseStr(`*${b[1].split('*')[1]}*`, g || {});
-          var d = parseStr(`*${b[1].split('*')[3]}*`, g || {});
-          var e = false;
-          switch (b[1].split('*')[2].split('*')[0]) {
-            case '=':
-              e = c == d;
-              break;
-            case '=/':
-              e = c != d;
-              break;
-            case '<~':
-              try {
-                c = +`${c}`;
-                d = +`${d}`;
-                e = c < d;
-              } catch (m) {
-                throw new Error('ERROR');
-              }
-          }
-          if (!e) {
-            ifs[`${Object.keys(ifs).length}`] = Number(b[1].split('*')[4].replace('#', '').replace(')', ''));
+        var c = parseStr(`*${b[1].split('*')[1]}*`, g || {});
+        var d = parseStr(`*${b[1].split('*')[3]}*`, g || {});
+        var e = false;
+        switch (b[1].split('*')[2].split('*')[0]) {
+          case '=':
+          e = c == d;
+          break;
+          case '=/':
+          e = c != d;
+          break;
+          case '<~':
+          try {
+            c = +`${c}`;
+            d = +`${d}`;
+            e = c < d;
+          } catch (m) {
+            throw new Error('ERROR');
           }
           break;
+          case '>~':
+          try {
+            c = +`${c}`;
+            d = +`${d}`;
+            e = c > d;
+          } catch (m) {
+            throw new Error('ERROR');
+          }
+        }
+        if (!e) {
+          ifs[`${Object.keys(ifs).length}`] = Number(b[1].split('*')[4].replace('#', '').replace(')', ''));
+        }
+        break;
         case 'Fedora':
-          console.log(parseStr(replaceLast(b[1], ')', ''), g || {}));
-          break;
+        console.log(parseStr(replaceLast(b[1], ')', ''), g || {}));
+        break;
         case 'Pop!_OS':
-          var d = [];
-          for (var c = 0; c < Number(b[1].split('#')[1].replace(')', '')); c++) {
-            d.push(cd[$ + (c + 1)]);
-          }
-          for (var c = 0; c < Number(b[1].split('#')[0]); c++) {
-            compile(d.join('\n'), { currentindex: c });
-          }
-          ifs[`${Object.keys(ifs).length}`] = Number(b[1].split('#')[1].replace(')', ''));
-          break;
+        var d = [];
+        for (var c = 0; c < Number(b[1].split('#')[1].replace(')', '')); c++) {
+          d.push(cd[$ + (c + 1)]);
+        }
+        for (var c = 0; c < Number(b[1].split('#')[0]); c++) {
+          compile(d.join('\n'), { currentindex: c });
+        }
+        ifs[`${Object.keys(ifs).length}`] = Number(b[1].split('#')[1].replace(')', ''));
+        break;
         case 'Debian':
-          var c = parseStr(`*${b[1].split('*')[1]}*`, g || {});
-          var d = parseStr(`*${b[1].split('*')[3]}*`, g || {});
-          var e = false;
-          var l = [];
-          for (var x = 0; x < Number(b[1].split('#')[1].replace(')', '')); x++) {
-            l.push(cd[$ + (x + 1)]);
-          }
-          switch (b[1].split('*')[2].split('*')[0]) {
-            case '=':
-              while (c == d) {
-                compile(l.join('\n'));
-              }
-              break;
-            case '=/':
-              while (c != d) {
-                compile(l.join('\n'));
-              }
-              break;
-            case '<~':
-              try {
-                c = +`${c}`;
-                d = +`${d}`;
-                while (c < d) {
-                  compile(l.join('\n'));
-                }
-              } catch (m) {
-                throw new Error('ERROR');
-              }
+        var c = parseStr(`*${b[1].split('*')[1]}*`, g || {});
+        var d = parseStr(`*${b[1].split('*')[3]}*`, g || {});
+        var e = false;
+        var l = [];
+        for (var x = 0; x < Number(b[1].split('#')[1].replace(')', '')); x++) {
+          l.push(cd[$ + (x + 1)]);
+        }
+        switch (b[1].split('*')[2].split('*')[0]) {
+          case '=':
+          while (c == d) {
+            compile(l.join('\n'));
           }
           break;
+          case '=/':
+          while (c != d) {
+            compile(l.join('\n'));
+          }
+          break;
+          case '<~':
+          try {
+            c = +`${c}`;
+            d = +`${d}`;
+            while (c < d) {
+              compile(l.join('\n'));
+            }
+          } catch (m) {
+            throw new Error('ERROR');
+          }
+        }
+        break;
         case 'RaspberryPiOS':
-          var c = parseStr(`*${b[1].split('*')[1]}*`, g||{});
-          var d = parseStr(`*${b[1].split('*')[3]}*`, g||{});
-          var encod = new TextEncoder();
-          var dat = encod.encode(d);
-          Deno.writeFileSync(c, dat);
-          break;
+        var c = parseStr(`*${b[1].split('*')[1]}*`, g||{});
+        var d = parseStr(`*${b[1].split('*')[3]}*`, g||{});
+        var encod = new TextEncoder();
+        var dat = encod.encode(d);
+        Deno.writeFileSync(c, dat);
+        break;
         case 'Manjaro':
-          var c = parseStr(`*${b[1].split('*')[1]}*`, g||{});
-          var d = parseStr(`*${b[1].split('*')[3]}*`, g||{});
-          var enco = new TextEncoder();
-          var dat = enco.encode(d);
-          try {
-            Deno.writeFileSync(c, dat, { create: false });
-          } catch (e) {
-            throw new Error('Error at line ' + ($ + 1) + '. Probably the file does not exist.');
-          }
-          break;
+        var c = parseStr(`*${b[1].split('*')[1]}*`, g||{});
+        var d = parseStr(`*${b[1].split('*')[3]}*`, g||{});
+        var enco = new TextEncoder();
+        var dat = enco.encode(d);
+        try {
+          Deno.writeFileSync(c, dat, { create: false });
+        } catch (e) {
+          throw new Error('Error at line ' + ($ + 1) + '. Probably the file does not exist.');
+        }
+        break;
         case 'Ubuntu':
-          var c = parseStr(`*${b[1].split('*')[1]}*`, g||{});
-          try {
-            Deno.removeSync(c, { recursive: true });
-          } catch (e) {
-            throw new Error('Error at line ' + ($ + 1))
-          }
-          break;
+        var c = parseStr(`*${b[1].split('*')[1]}*`, g||{});
+        try {
+          Deno.removeSync(c, { recursive: true });
+        } catch (e) {
+          throw new Error('Error at line ' + ($ + 1))
+        }
+        break;
         case 'ZorinOS':
-          var c = parseStr(`*${b[1].split('*')[1]}*`, g||{});
-          try {
-            Deno.mkdirSync(c);
-          } catch (e) {
-            throw new Error('Error at line ' + ($ + 1))
-          }
-          break;
+        var c = parseStr(`*${b[1].split('*')[1]}*`, g||{});
+        try {
+          Deno.mkdirSync(c);
+        } catch (e) {
+          throw new Error('Error at line ' + ($ + 1))
+        }
+        break;
         case 'LinuxMint':
-          if(!exp) throw new Error(`You used an experimental feature, but experimental features is not enabled. To enable experimental features, add the --experimental flag. (error at line ${$ + 1})`);
-          var c = parseStr(`*${b[1].split('*')[1]}*`, g || {});
-          ifs[`${Object.keys(ifs).length}`] = Number(b[1].split('#')[1].replace(')', ''));
-          var d = [];
-          for (var j = 0; j < Number(b[1].split('#')[1].replace(')', '')); j++) {
-            d.push(cd[$ + (j + 1)]);
-          }
-          fetch(c)
-            .then(res => { return res.text(); })
-            .then(x => {
-              compile(d.join('\n'), {
-                data: x,
-                error: 'false'
-              });
-            }).catch(e => {
-              compile(d.join('\n'), {
-                data: 'null',
-                error: 'true'
-              });
-            });
-          break;
+        if(!exp) throw new Error(`You used an experimental feature, but experimental features is not enabled. To enable experimental features, add the --experimental flag. (error at line ${$ + 1})`);
+        var c = parseStr(`*${b[1].split('*')[1]}*`, g || {});
+        ifs[`${Object.keys(ifs).length}`] = Number(b[1].split('#')[1].replace(')', ''));
+        var d = [];
+        for (var j = 0; j < Number(b[1].split('#')[1].replace(')', '')); j++) {
+          d.push(cd[$ + (j + 1)]);
+        }
+        fetch(c)
+        .then(res => { return res.text(); })
+        .then(x => {
+          compile(d.join('\n'), {
+            data: x,
+            error: 'false'
+          });
+        }).catch(e => {
+          compile(d.join('\n'), {
+            data: 'null',
+            error: 'true'
+          });
+        });
+        break;
         case 'GarudaLinux':
-          if(!exp) throw new Error(`You used an experimental feature, but experimental features is not enabled. To enable experimental features, add the --experimental flag. (error at line ${$ + 1})`);
-          b[1] = replaceLast(b[1], ')', '');
-          var e = b[1].split(' ')[0];
-          var c = b[1].split(/(.*)\#(.*)/);
-          var d = c[1].split(' ');
-          c = c[2];
-          ifs[`${Object.keys(ifs).length}`] = c;
-          var l = [];
-          for (var x = 0; x < c; x++) {
-            l.push(cd[$ + (x + 1)]);
-          }
-          d.shift();
-          funcs[e] = {
-            args: d,
-            ar: l
-          };
-          break;
+        if(!exp) throw new Error(`You used an experimental feature, but experimental features is not enabled. To enable experimental features, add the --experimental flag. (error at line ${$ + 1})`);
+        b[1] = replaceLast(b[1], ')', '');
+        var e = b[1].split(' ')[0];
+        var c = b[1].split(/(.*)\#(.*)/);
+        var d = c[1].split(' ');
+        c = c[2];
+        ifs[`${Object.keys(ifs).length}`] = c;
+        var l = [];
+        for (var x = 0; x < c; x++) {
+          l.push(cd[$ + (x + 1)]);
+        }
+        d.shift();
+        funcs[e] = {
+          args: d,
+          ar: l
+        };
+        break;
         case 'GTK':
-          if(!exp) throw new Error(`You used an experimental feature, but experimental features is not enabled. To enable experimental features, add the --experimental flag. (error at line ${$ + 1})`);
-          var c = b[1].split(' ')[0];
-          if (!(c in funcs)) throw new Error(c + 'is not defined (line ' + $ + ')');
-          var d = replaceLast(b[1], ')', '');
-          var e = [];
-          d = d.replace(`${c} `, '');
-          d = d.slice(1, d.length - 1);
-          d = d.split(/\* \*/g);
-          d.forEach(v => {
-            e.push(v);
-          });
-          var f = {};
-          funcs[c].args.forEach((rv, o) => {
-            f[rv] = parseStr('*' + e[o] + '*', g || {})
-          });
-          compile(funcs[c].ar.join('\n'), f);
-          break;
-          var f = {};
-          funcs[c].args.forEach((rv, o) => {
-            var p = replaceLast(e[o], '}', '');
-            p = p.replace('{', '');
-            f[rv] = parseStr(p, g || {})
-          });
-          compile(funcs[c].ar.join('\n'), f);
-          break;
+        if(!exp) throw new Error(`You used an experimental feature, but experimental features is not enabled. To enable experimental features, add the --experimental flag. (error at line ${$ + 1})`);
+        var c = b[1].split(' ')[0];
+        if (!(c in funcs)) throw new Error(c + 'is not defined (line ' + $ + ')');
+        var d = replaceLast(b[1], ')', '');
+        var e = [];
+        d = d.replace(`${c} `, '');
+        d = d.slice(1, d.length - 1);
+        d = d.split(/\*\,[\s]?\*/g);
+        d.forEach(v => {
+          e.push(v);
+        });
+        var f = {};
+        funcs[c].args.forEach((rv, o) => {
+          f[rv] = parseStr('*' + e[o] + '*', g || {})
+        });
+        compile(funcs[c].ar.join('\n'), f);
+        break;
+        var f = {};
+        funcs[c].args.forEach((rv, o) => {
+          var p = replaceLast(e[o], '}', '');
+          p = p.replace('{', '');
+          f[rv] = parseStr(p, g || {})
+        });
+        compile(funcs[c].ar.join('\n'), f);
+        break;
         case 'KDE':
-          console.clear();
+        console.clear();
+        break;
         case 'Android':
         var str = parseStr(replaceLast(b[1], ')', ''), g || {})
         var l = exp;
@@ -244,7 +268,7 @@ function compile(a, g) {
           try {
             compile(Deno.readTextFileSync(str));
           } catch(e) {
-            console.log("Error");
+            console.log("Compile Error");
             console.log(e);
             Deno.exit(1);
           }
