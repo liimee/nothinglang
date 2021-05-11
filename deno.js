@@ -1,16 +1,20 @@
 import { Parser } from 'https://jspm.dev/expr-eval';
+import { isURL } from "https://deno.land/x/is_url/mod.ts";
 
 var exp = false;
 var vars = {};
 var ifs = {};
 var funcs = {};
+var args = [];
 
 try {
   const decoder = new TextDecoder("utf-8");
   try {
     const data = Deno.readFileSync(Deno.args[0]);
-    if(Deno.args.includes('--experimental')) exp = true;
-    compile(decoder.decode(data)); 
+    args = [...Deno.args];
+    if(Deno.args.includes('--experimental')) { exp = true; args.shift(); }
+    args.shift();
+    compile(decoder.decode(data));
   } catch (e) {
     console.log('Compile Error');
     console.log(e);
@@ -220,6 +224,32 @@ function compile(a, g) {
           break;
         case 'KDE':
           console.clear();
+        case 'Android':
+        var str = parseStr(replaceLast(b[1], ')', ''), g || {})
+        var l = exp;
+        exp = true;
+        if(isURL(str)) {
+          fetch(str)
+          .then(res => {return res.text()})
+          .then(data => {
+            try {
+              compile(data);
+            } catch(e) {
+              console.log('Compile Error');
+              console.log(e);
+              Deno.exit(1);
+            }
+          })
+        } else {
+          try {
+            compile(Deno.readTextFileSync(str));
+          } catch(e) {
+            console.log("Error");
+            console.log(e);
+            Deno.exit(1);
+          }
+        }
+        exp = l;
       }
     }
   })
@@ -234,6 +264,9 @@ function parseStr(a, b) {
     [...(a.matchAll(/\<\!prompt (.*?)\!\>/g))].forEach((v, i, r) => {
       a = a.replace(v[0], prompt(v[1]));
     });
+    [...(a.matchAll(/\<\!prompt (.*?)\!\>/g))].forEach((v, i, r) => {
+      a = a.replace(v[0], prompt(v[1]));
+    });
     [...(a.matchAll(/\<\!confirm (.*?)\!\>/g))].forEach(async (v, i, r) => {
       a = a.replace(v[0], confirm(v[1]));
     });
@@ -243,8 +276,8 @@ function parseStr(a, b) {
     [...(a.matchAll(/\<\!deepin\.dec (.*?)\!\>/g))].forEach((v, i, r) => {
       a = a.replace(v[0], atob(v[1]));
     });
-    [...(a.matchAll(/\<\!solus (.*?)\!\>/g))].forEach((v, i, r) => {                                                                                           
-      a = a.replace(v[0], v[1].toUpperCase());                                                                                                                               
+    [...(a.matchAll(/\<\!solus (.*?)\!\>/g))].forEach((v, i, r) => {
+      a = a.replace(v[0], v[1].toUpperCase());
     });
     [...(a.matchAll(/\<\!slackware (.*?)\!\>/g))].forEach((v, i, r) => {
       a = a.replace(v[0], v[1].toLowerCase());
@@ -280,6 +313,9 @@ function parseVars(a, b) {
   });
   Object.keys(b).forEach(v => {
     a = a.replaceAll(`<@${v}@>`, b[v]);
+  });
+  [...(a.matchAll(/\<\!solus (.*?)\!\>/g))].forEach(v => {
+    a = a.replace(v[0], args[Number(v[1])]);
   });
   [...(a.matchAll(/\<\!opensuse (.*?)\!\>/g))].forEach((v, i, r) => {
     var decode = new TextDecoder("utf-8");
