@@ -1,6 +1,4 @@
 import { Parser } from 'https://jspm.dev/expr-eval';
-import { isURL } from "https://deno.land/x/is_url/mod.ts";
-import { unZipFromURL } from 'https://deno.land/x/zip@v1.1.1/mod.ts'
 
 var exp = false;
 var vars = {};
@@ -8,18 +6,6 @@ var ifs = {};
 var funcs = {};
 var args = [];
 
-if(Deno.args.includes('update')) {
-  fetch('https://api.github.com/repos/liimee/nothinglang/releases')
-  .then(res => {return res.json()})
-  .then(data => {
-    var fore = +data[0].tag_name.replace('-rc', '');
-    if(fore > 0.7) update(data)
-  })
-
-  function update(data) {
-    unZipFromURL(data[0].assets[0].browser_download_url)
-  }
-} else {
   try {
     const decoder = new TextDecoder("utf-8");
     try {
@@ -38,7 +24,6 @@ if(Deno.args.includes('update')) {
     console.log(e);
     Deno.exit(1);
   }
-}
 
 function replaceLast(a, b, c) {
   var pcs = a.split(b);
