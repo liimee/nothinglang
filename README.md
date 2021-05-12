@@ -7,6 +7,8 @@ it's case-sensitive anyways
 
 Nothinglang compiles to JS.  
 And, obviously, it's really bad
+
+🚧 Breaking changes may happen anytime soon.
 ___
 ## Guide
 [📖 Guide](guide.md)
