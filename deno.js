@@ -14,7 +14,7 @@ try {
     args = [...Deno.args];
     if(Deno.args.includes('--experimental')) { exp = true; args.shift(); }
     args.shift();
-    compile(decoder.decode(data));
+    compile(`Arch(*>>path*,*${new URL('.', import.meta.url).pathname}*)\n${decoder.decode(data)}`);
   } catch (e) {
     console.log('Compile Error');
     console.log(e);
