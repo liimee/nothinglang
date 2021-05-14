@@ -345,7 +345,7 @@ function parseVars(a, b) {
   Object.keys(b).forEach(v => {
     a = a.replaceAll(`<@${v}@>`, b[v]);
   });
-  [...(a.matchAll(/\<\!solus (.*?)\!\>/g))].forEach(v => {
+  [...(a.matchAll(/\<\!flatpak (.*?)\!\>/g))].forEach(v => {
     a = a.replace(v[0], args[Number(v[1])]);
   });
   [...(a.matchAll(/\<\!opensuse (.*?)\!\>/g))].forEach((v, i, r) => {
