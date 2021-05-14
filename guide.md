@@ -167,6 +167,10 @@ Arch(*what*,*<!slackware SHRUG!>*)
 RedHat(1)
 Get current path (it's a variable anyway)
 Arch(*path*, *<|>>path|>*)
+
+RedHat(1)
+Get argument at index
+Arch(*pizzatype*, *<!flatpak index!>*)
 ```
 
 ___
