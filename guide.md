@@ -112,7 +112,7 @@ Android(*URLorPath*)
 Android(*file2.nothing*)
 ```
 
-## Exit program
+### Exit program
 ```
 Snap()
 ```
