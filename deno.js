@@ -1,4 +1,5 @@
 import { Parser } from 'https://jspm.dev/expr-eval';
+import { isURL } from "https://deno.land/x/is_url/mod.ts";
 
 var exp = false;
 var vars = {};
@@ -6,24 +7,24 @@ var ifs = {};
 var funcs = {};
 var args = [];
 
+try {
+  const decoder = new TextDecoder("utf-8");
   try {
-    const decoder = new TextDecoder("utf-8");
-    try {
-      const data = Deno.readFileSync(Deno.args[0]);
-      args = [...Deno.args];
-      if(Deno.args.includes('--experimental')) { exp = true; args.shift(); }
-      args.shift();
-      compile(decoder.decode(data));
-    } catch (e) {
-      console.log('Compile Error');
-      console.log(e);
-      Deno.exit(1);
-    }
+    const data = Deno.readFileSync(Deno.args[0]);
+    args = [...Deno.args];
+    if(Deno.args.includes('--experimental')) { exp = true; args.shift(); }
+    args.shift();
+    compile(decoder.decode(data));
   } catch (e) {
-    console.log('Error');
+    console.log('Compile Error');
     console.log(e);
     Deno.exit(1);
   }
+} catch (e) {
+  console.log('Error');
+  console.log(e);
+  Deno.exit(1);
+}
 
 function replaceLast(a, b, c) {
   var pcs = a.split(b);
@@ -50,8 +51,14 @@ function compile(a, g) {
         alert(parseStr(replaceLast(b[1], ')', ''), g || {}));
         break;
         case 'Arch':
+        if((parseStr(b[1].split(/\,[\s]?/)[0], g || {}) in vars) && vars[parseStr(b[1].split(/\,[\s]?/)[0], g || {})].mutable === false) throw new Error(`Variable is immutable. Cannot modify ${parseStr(b[1].split(/\,[\s]?/)[0], g || {})}'s value.`)
         if (b[1].split('*')[1].split('*')[0].includes(',')) throw new Error(`Invalid variable name`);
-        vars[parseStr(b[1].split(',')[0], g || {})] = parseStr(replaceLast(b[1], ')', '').split(',')[1], g || {});
+        var e = true;
+        if(parseStr(b[1].split(/\,[\s]?/)[0], g || {}) in vars === false && (parseStr(replaceLast(b[1], ')', '').split(/\,[\s]?/)[2]||'*true*', g || {})||'true') === 'false') e = false;
+        vars[parseStr(b[1].split(/\,[\s]?/)[0], g || {})] = {
+          value: parseStr(replaceLast(b[1].split(/\,[\s]?/)[1], ')', ''), g || {}),
+          mutable: e
+        };
         break;
         case 'Elementary':
         var c = parseStr(`*${b[1].split('*')[1]}*`, g || {});
@@ -318,7 +325,7 @@ function parseStr(a, b) {
 
 function parseVars(a, b) {
   Object.keys(vars).forEach(v => {
-    a = a.replaceAll(`<|${v}|>`, vars[v]);
+    a = a.replaceAll(`<|${v}|>`, vars[v].value||'undefined');
   });
   Object.keys(b).forEach(v => {
     a = a.replaceAll(`<@${v}@>`, b[v]);
