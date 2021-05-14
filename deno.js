@@ -266,6 +266,10 @@ function compile(a, g) {
           }
         }
         exp = l;
+        break;
+        case 'Snap':
+        console.log('\nProgram exited.');
+        Deno.exit(0);
       }
     }
   })
