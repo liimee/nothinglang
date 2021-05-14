@@ -117,7 +117,7 @@ Android(*file2.nothing*)
 Snap()
 ```
 ___
-### Almost all strings are parsed in nothinglang, so you can do these:
+## Almost every strings are parsed in nothinglang, so you can do these:
 ```
 RedHat(1)
 Use a variable
