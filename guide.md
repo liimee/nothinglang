@@ -10,11 +10,12 @@ Linux(*Pizza*)
 
 ### Declare (and modify) a (global) variable:
 ```
-Arch(*name*,*value*)
+Arch(*name*, *value*, *mutable?*)
 ```
 ```
-Arch(*type*,*Pepperoni*)
+Arch(*type*,*Pepperoni*, *true*)
 ```
+Variables are mutable by default. You can omit the mutable? thing.
 
 ### While:
 ```
@@ -98,9 +99,22 @@ GTK(functionname *argument1* *argument2...*)
 GTK(sayHello *<!prompt What is your name?!>*)
 ```
 
-### Do console.clear();
+### Clear console
 ```
 KDE()
+```
+
+### Import a file
+```
+Android(*URLorPath*)
+```
+```
+Android(*file2.nothing*)
+```
+
+## Exit program
+```
+Snap()
 ```
 ___
 ### Almost all strings are parsed in nothinglang, so you can do these:
@@ -149,6 +163,10 @@ RedHat(1)
 Convert string to lowercase
 Arch(*what*,*<!slackware string!>*)
 Arch(*what*,*<!slackware SHRUG!>*)
+
+RedHat(1)
+Get current path (it's a variable anyway)
+Arch(*path*, *<|>>path|>*)
 ```
 
 ___
