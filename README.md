@@ -1,6 +1,4 @@
-<img src="nlang.png" alt="nothinglang" align="center">
-
-# nothinglang
+<h1 align="center"><img src="nlang.png" alt="nothinglang"><br />Nothinglang</h1>
 a useless programming language that just "works"  
 and yes, everything is linux 🐧  
 it's case-sensitive anyways  
