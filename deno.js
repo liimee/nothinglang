@@ -135,6 +135,17 @@ function compile(a, g) {
           } catch (m) {
             throw new Error('ERROR');
           }
+          break;
+          case '>~':
+          try {
+            c = +`${c}`;
+            d = +`${d}`;
+            while (c > d) {
+              compile(l.join('\n'));
+            }
+          } catch (m) {
+            throw new Error('ERROR');
+          }
         }
         break;
         case 'RaspberryPiOS':
