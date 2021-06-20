@@ -122,7 +122,7 @@ Snap()
 Extend(*URLorPath*)
 
 RedHat(1)
-Also, the JS file, so far, can define functions.
+Also, the JS file, so far, can define functions, set variables, and run another nothinglang code.
 ```
 ___
 ## Almost every strings are parsed in nothinglang, so you can do these:
