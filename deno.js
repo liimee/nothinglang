@@ -281,6 +281,47 @@ function compile(a, g) {
         case 'Snap':
         console.log('\nProgram exited.');
         Deno.exit(0);
+        break;
+        case 'Extend':
+        var thing = {
+          win: window,
+          nothinglang: {
+            defineFun: (name, fun) => {
+              extendfun[name] = fun;
+            },
+            run: (nl) => {
+              try {compile(nl)} catch(e) {
+                console.log("Compile Error");
+                console.log(e);
+                Deno.exit(1);
+              }
+            }
+          }
+        }
+        var str = parseStr(replaceLast(b[1], ')', ''), g || {})
+        if(isURL(str)) {
+          fetch(str)
+          .then(res => {return res.text()})
+          .then(data => {
+            new Function(data).call(thing);
+          })
+        } else {
+          new Function(Deno.readTextFileSync(str)).call(thing);
+        }
+        break;
+        default:
+        if(b[0] in extendfun) {
+          var c = b[1].split(' ')[0];
+          var d = replaceLast(b[1], ')', '');
+          var e = [];
+          d = d.replace(`${c} `, '');
+          d = d.slice(1, d.length - 1);
+          d = d.split(/\*\,[\s]?\*/g);
+          d.forEach(v => {
+            e.push(v);
+          });
+          extendfun[b[0]](...e);
+        }
       }
     }
   })
