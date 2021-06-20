@@ -284,18 +284,18 @@ function compile(a, g) {
         break;
         case 'Extend':
         var thing = {
-          win: window,
-          nothinglang: {
-            defineFun: (name, fun) => {
-              extendfun[name] = fun;
-            },
-            run: (nl) => {
-              try {compile(nl)} catch(e) {
-                console.log("Compile Error");
-                console.log(e);
-                Deno.exit(1);
-              }
+          defineFun: (name, fun) => {
+            extendfun[name] = fun;
+          },
+          run: (nl) => {
+            try {compile(nl)} catch(e) {
+              console.log("Compile Error");
+              console.log(e);
+              Deno.exit(1);
             }
+          },
+          setVar: (n, v, i=true) => {
+            compile(`Arch(*${n}*, *${v}*, *${i}*)`)
           }
         }
         var str = parseStr(replaceLast(b[1], ')', ''), g || {})
