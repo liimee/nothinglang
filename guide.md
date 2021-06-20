@@ -116,6 +116,14 @@ Android(*file2.nothing*)
 ```
 Snap()
 ```
+
+### Run a JS/Deno file (not available yet)
+```
+Extend(*URLorPath*)
+
+RedHat(1)
+Also, the JS file, so far, can define functions.
+```
 ___
 ## Almost every strings are parsed in nothinglang, so you can do these:
 ```
