@@ -6,6 +6,7 @@ var vars = {};
 var ifs = {};
 var funcs = {};
 var args = [];
+var extendfun = {};
 
 try {
   const decoder = new TextDecoder("utf-8");
