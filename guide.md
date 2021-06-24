@@ -59,7 +59,7 @@ Pop!_OS(8#1)
 Linux(*<@currentindex@>*) 
 ```
 
-### (Multi-Line) Comment:
+### (Multi-Line) Comment (not available yet):
 ```
 RedHat(number-of-lines-since-current)
 ```
