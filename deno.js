@@ -47,7 +47,7 @@ function compile(a, g) {
     });
     if (!next) {
       var b = v.split(/\((.+)/);
-      switch (b[0]) {
+      switch (b[0].replace(/\s/g, '')) {
         case 'Linux':
         alert(parseStr(replaceLast(b[1], ')', ''), g || {}));
         break;
@@ -183,27 +183,8 @@ function compile(a, g) {
           throw new Error('Error at line ' + ($ + 1))
         }
         break;
-        case 'LinuxMint':
-        if(!exp) throw new Error(`You used an experimental feature, but experimental features is not enabled. To enable experimental features, add the --experimental flag. (error at line ${$ + 1})`);
-        var c = parseStr(`*${b[1].split('*')[1]}*`, g || {});
-        ifs[`${Object.keys(ifs).length}`] = Number(b[1].split('#')[1].replace(')', ''));
-        var d = [];
-        for (var j = 0; j < Number(b[1].split('#')[1].replace(')', '')); j++) {
-          d.push(cd[$ + (j + 1)]);
-        }
-        fetch(c)
-        .then(res => { return res.text(); })
-        .then(x => {
-          compile(d.join('\n'), {
-            data: x,
-            error: 'false'
-          });
-        }).catch(e => {
-          compile(d.join('\n'), {
-            data: 'null',
-            error: 'true'
-          });
-        });
+        case 'RedHat':
+        ifs[`${Object.keys(ifs).length}`] = Number(b[1].replaceAll(')', ''));
         break;
         case 'GarudaLinux':
         if(!exp) throw new Error(`You used an experimental feature, but experimental features is not enabled. To enable experimental features, add the --experimental flag. (error at line ${$ + 1})`);
