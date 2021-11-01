@@ -1,3 +1,5 @@
+# ARCHIVED
+
 <h1 align="center"><img src="nlang.png" alt="nothinglang"><br />Nothinglang</h1>
 
 a useless programming language that just "works"  
@@ -15,5 +17,5 @@ ___
 [📖 Guide](guide.md)
 
 ___
-More stuff soon  
+<s>More stuff soon</s>  
 **It's really bad so use at your own risk**.
